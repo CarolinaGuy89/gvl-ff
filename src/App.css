@@ -117,12 +117,11 @@ a:hover {
   float: left;
   width: 25%;
   text-align: center;
-  padding: 6px 0px;
   transition: all 0.3s ease;
   background-color: rgba(20, 88, 32, 0.637);
   color: whitesmoke;
   font-size: 24px;
-  height: 48px;
+  height: 4rem;
 }
 
 .league-bar button:hover {
@@ -201,6 +200,54 @@ a:hover {
   border: 1px solid;
 }
 
+/**************************************
+//  Page: Weekly Matchups
+//  Stat card containers
+//
+***************************************/
+
+.stat-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.stat-card {
+  background-color: rgba(255, 255, 255, .6);
+  /* padding: .5rem; */
+  border-radius: 5px;
+  margin: 1em;
+  box-shadow: .5rem .5rem .5rem #00000090;
+  flex: 1 1 0;
+  max-width: 15rem;
+  min-height: 10rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-title {
+  background: var(--bright);
+  width: 100%;
+  border-radius: 5px 5px 0px 0px;
+  min-height: 25%;
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-title h3 {
+  margin: 5px;
+}
+
+.stat-card p {
+  margin: 7px 7px 25px 7px;
+}
+
+
+
 
 /**************************************
 //
@@ -208,10 +255,28 @@ a:hover {
 //
 ***************************************/
 @media (max-width: 500px) {
+
+  body {
+    background-image: url('../public/background_mobile.jpg');
+    /*background-color: var(--bg);*/
+    /*background-blend-mode: multiply;*/
+    /*background-size: cover;*/
+    background-position: center center;
+    /*background-repeat: no-repeat;*/
+    /*background-attachment: fixed;*/
+  
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+  }
+
+/**************************************
+//  MOBILE: Style for the Site Title
+***************************************/
   .siteHeader {
     margin-left: auto;
     margin-right: auto;  
-    margin-top: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: .5rem;
     font-size: 24px;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.4);
@@ -222,4 +287,70 @@ a:hover {
   .col {
     flex: 0 0 50%; /* At a minimum viewport width of 768px, make each column 50% width */
   }
+
+/**************************************
+//  Style for the league choice bar
+//***************************************/
+.league-bar {
+  width: 100%;
+  background-color:rgba(0, 0, 0, 0);
+  overflow: auto;
+  margin-bottom: .5rem;
+}
+
+.selectWeek-dropdown {
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 1rem;
+  background-color:rgba(0, 0, 0, .6);
+  color: rgb(187, 255, 178);
+}
+
+.league-bar button {
+  float: left;
+  width: 33.3%;
+  text-align: center;
+  padding: 0px 0px;
+  transition: all 0.3s ease;
+  background-color: rgba(20, 88, 32, 0.637);
+  color: whitesmoke;
+  font-size: 14px;
+  height: 48px;
+}
+
+.league-bar button.selected {
+  background-color: rgb(20, 255, 32,1);
+  color:#000000;
+}
+
+
+/**************************************
+//  MOBILE: Style for the navigation bar
+***************************************/
+
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 6px 12px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* Add a color to the active/current link */
+.topnav a.selected {
+  background-color: #04AA6D;
+  color: white;
+}
+
+
+
+/*End Mobile formatting*/
 }

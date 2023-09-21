@@ -68,3 +68,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+This project is current under development.
+
+This started as a learning project to simply learn some basic Javascript and it turned into so much more. It started with a desire to some how allow some friends and I to digitially live draft for fantasy football.  From there, I discovered a third party ESPN API.  In my attempt to understand how that is even used, I browsed other's repo's until I came across ( name/link)'s repo.  This was shocking to me how much could be done using Javascript alone.
+
+Since then it lead me down the path to discover ReactJS, and through that I discovered NextJS as well.  After some moderate success and a tremendous amount of learning, I decided to rebuild without NextJS due to API issues I was dealing with.
+
+Credits to:
+
+
+NPM commands:
+Local Dev Testing: npx webpack serve --mode development
+http://localhost:8097/

@@ -5,10 +5,8 @@ import work from '../components/data/draft/work-draft2023.json'
 import Table from '../components/draftTable'
 
 export default function Draft({ leagueId }) {
-    const [draft, setDraft] = useState([]);
-    
-    console.log(leagueId);
-    useEffect(() => {
+/*    const [draft, setDraft] = useState([]);
+        useEffect(() => {
         if (leagueId === 'gvl') {
           setDraft(gvl);
         } else if (leagueId === 'family') {
@@ -18,15 +16,20 @@ export default function Draft({ leagueId }) {
         }
       }, [leagueId]);
     
-
+*/
     return (
     <> 
         <div>
-            <h2>
-                <i>Coming for the 2023 season {leagueId}.</i>
+            <h2 style={{textAlign: "center", color:"white", fontSize:"48px"}}>
+            This is Simon:
+            👷
             </h2>
-            <Table data = {draft} />
-            {/*<p>{draft.length > 0 ? draft[0].manager : 'Loading...'}</p>*/}
+            <h3 style={{textAlign: "center", color:"white"}}>
+            Simon doesn't work very fast.
+            
+            </h3>
+
+            <p style={{textAlign: "center", color:"white"}}> <br/>He will finish this page eventually...</p>
         </div>
     </>
     )

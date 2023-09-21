@@ -43,26 +43,28 @@ function SiteHeader({ onLeagueIdChange }) {
             }}
             className={selectedButton === 'gvl' ? 'selected' : ''}>G-Vegas</button>
 
-        <button style={{ fontSize: "16px"}} onClick={() => {
+        <button onClick={() => {
             changeLeague("family");
             setSelectedButton('family');
             }}
             className={selectedButton === 'family' ? 'selected' : ''}>League of Family Drama</button>
 
-        <button style={{ fontSize: "16px"}} onClick={() => {
+        <button onClick={() => {
             changeLeague("work");
             setSelectedButton('work');
             }}
             className={selectedButton === 'work' ? 'selected' : ''}>Logistically, IT&apos;s complicated</button>
 
-        <button style={{ fontSize: "16px"}} onClick={() => {
-            changeLeague("hockey");
-            setSelectedButton('hockey');
-            }}
-            className={selectedButton === 'hockey' ? 'selected' : ''}>Full Contact Turf Hockey</button>
     </div>
     </>
   );
 }
 
 export default SiteHeader;
+/*
+        <button onClick={() => {
+            changeLeague("hockey");
+            setSelectedButton('hockey');
+            }}
+            className={selectedButton === 'hockey' ? 'selected' : ''}>Full Contact Turf Hockey</button>
+*/

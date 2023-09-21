@@ -22,7 +22,7 @@ function App() {
     <SiteHeader onLeagueIdChange={handleLeagueIdChange} />
     <Router>
       <div>
-        <Navbar />
+        {<Navbar />}
         <Routes>
           {/* Route to the Team component */}
           <Route path="/" element={<Home leagueId = {leagueId} />} />

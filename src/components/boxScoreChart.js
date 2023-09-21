@@ -9,30 +9,44 @@ export default function ChartComponent({ boxscores }) {
     if (chartRef.current) {
       chartRef.current.destroy();
     }
-
+    Chart.defaults.font.size = 16;
+    Chart.defaults.color = '#fff';
     // Create the new chart
-    const scores = boxscores.map((boxscore) => boxscore.score);
-    const homeTeams = boxscores.map((boxscore) => boxscore.manager);
+    const matchId = boxscores.map((boxscore) => boxscore.matchId);
+
+    const homeScore = boxscores.map((boxscore) => boxscore.homeScore);
+    const homeResult = boxscores.map((boxscore) => boxscore.homeResult);
+    const homeManager = boxscores.map((boxscore) => boxscore.homeManager);
+
+    const awayScore = boxscores.map((boxscore) => boxscore.awayScore);
+    const awayResult = boxscores.map((boxscore) => boxscore.awayResult);
+    const awayManager = boxscores.map((boxscore) => boxscore.awayManager);
 
     const canvas = document.getElementById('boxscoreChart');
     
-    Chart.defaults.font.size = 16;
-    Chart.defaults.color = '#fff';
+
     chartRef.current = new Chart(canvas, {
       type: 'bar',
+      grouped: false,
       data: {
-        labels: boxscores.map((_, index) => `${homeTeams[index]}`),
+        labels: boxscores.map((_, index) => [`${homeManager[index]}`,`${awayManager[index]}`]),
         datasets: [
           {
-            label: 'Score',
-            data: scores,
-            backgroundColor: 'rgb(0, 184, 0)',
+            label: 'Loser',
+            data: homeScore,
+            backgroundColor: homeResult,
+            borderWidth: 1,
+          },
+          {
+            label: 'Winner',
+            data: awayScore,
+            backgroundColor: awayResult,
             borderWidth: 1,
           },
         ],
       },
       options: {
-        indexAxis: 'y',
+        indexAxis: 'x',
         scales: {
           y: {
             beginAtZero: true,
@@ -42,6 +56,49 @@ export default function ChartComponent({ boxscores }) {
     });
   }, [boxscores]);
 
+
+
+
+
+
+
+
+/*    const scores = boxscores.map((boxscore) => boxscore.score);
+    const teamManager = boxscores.map((boxscore) => boxscore.manager);
+    const resultColor = boxscores.map((boxscore) => boxscore.result);
+
+    const canvas = document.getElementById('boxscoreChart');
+    
+
+    chartRef.current = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: boxscores.map((_, index) => `${teamManager[index]}`),
+        datasets: [
+          {
+            label: 'Score',
+            data: scores,
+            backgroundColor: resultColor,
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        layout: {
+          padding: {
+            right: 200
+          }
+        },
+        indexAxis: 'y',
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  }, [boxscores]);
+*/
   return (
     <div>
       <h2>Weekly Matchups</h2>
