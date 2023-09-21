@@ -12,6 +12,7 @@ export default function ChartComponent({ boxscores }) {
     Chart.defaults.font.size = 16;
     Chart.defaults.color = '#fff';
     // Create the new chart
+    //console.log(boxscores)
     const matchId = boxscores.map((boxscore) => boxscore.matchId);
 
     const homeScore = boxscores.map((boxscore) => boxscore.homeScore);

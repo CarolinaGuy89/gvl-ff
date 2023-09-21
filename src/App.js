@@ -4,7 +4,7 @@ import React, { useState, useEffect  } from 'react';
 import SiteHeader from './components/SiteHeader';
 import Team from './pages/team.js'
 import Draft from './pages/draft'
-import Home from './pages/home'
+import WeeklyOverview from './pages/WeeklyOverview.js'
 import Navbar from './components/navbar';
 import { Link } from 'react-router-dom';
 
@@ -25,7 +25,7 @@ function App() {
         {<Navbar />}
         <Routes>
           {/* Route to the Team component */}
-          <Route path="/" element={<Home leagueId = {leagueId} />} />
+          <Route path="/" element={<WeeklyOverview leagueId = {leagueId} />} />
           <Route path="/team" element={<Team leagueId = {leagueId} />} />
           <Route path="/draft" element={<Draft leagueId ={leagueId} />} />
 

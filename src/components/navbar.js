@@ -23,7 +23,7 @@ return(
     <>
     <div className="topnav">
     <Link to="/" onClick={() => changePage("home")}
-            className={page === '/' ? 'selected' : ''}>Weekly Matchup</Link>
+            className={page === '/' ? 'selected' : ''}>Weekly Matchups</Link>
 
     <Link to="/team" onClick={() => changePage("team")}
             className={page === 'team' ? 'selected' : ''}>Team Overview</Link>
