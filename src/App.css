@@ -308,13 +308,13 @@ a:hover {
 
 .league-bar button {
   float: left;
-  width: 33.3%;
+  width: 25%;
   text-align: center;
   padding: 0px 0px;
   transition: all 0.3s ease;
   background-color: rgba(20, 88, 32, 0.637);
   color: whitesmoke;
-  font-size: 14px;
+  font-size: 12px;
   height: 48px;
 }
 

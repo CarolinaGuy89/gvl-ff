@@ -126,7 +126,7 @@ export function determineOwner (leagueId, teamid){
             case 7:
                 manager = "Mike";
                 break
-            case 8:
+            case 9:
                 manager = "Markus";
                 break                
         }

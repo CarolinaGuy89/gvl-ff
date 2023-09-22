@@ -23,7 +23,7 @@ function SiteHeader({ onLeagueIdChange }) {
           break
         case "hockey":
           setPageTitle("Turf Hockey Fantasy Football");
-          onLeagueIdChange('hockey');
+          onLeagueIdChange(1335739020);
           break
       }
     }
@@ -54,7 +54,11 @@ function SiteHeader({ onLeagueIdChange }) {
             setSelectedButton('work');
             }}
             className={selectedButton === 'work' ? 'selected' : ''}>Logistically, IT&apos;s complicated</button>
-
+        <button onClick={() => {
+            changeLeague("hockey");
+            setSelectedButton('hockey');
+            }}
+            className={selectedButton === 'hockey' ? 'selected' : ''}>Full Contact Turf Hockey</button>
     </div>
     </>
   );
@@ -62,9 +66,5 @@ function SiteHeader({ onLeagueIdChange }) {
 
 export default SiteHeader;
 /*
-        <button onClick={() => {
-            changeLeague("hockey");
-            setSelectedButton('hockey');
-            }}
-            className={selectedButton === 'hockey' ? 'selected' : ''}>Full Contact Turf Hockey</button>
+
 */
