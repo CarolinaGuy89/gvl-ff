@@ -16,6 +16,29 @@ export default function MatchupBoxes({ boxscores }) {
     }, [boxscores]); // Update when boxscores change
 
 //Closest Game
+
+let closestIndex = -1;
+let closestDifference = Infinity;
+let winner = 'Loading...';
+let loser = 'Loading...';
+
+for (let i = 0; i < boxscores.length; i++) {
+  const difference = Math.abs(boxscores[i].homeScore - boxscores[i].awayScore);
+
+  if (difference < closestDifference) {
+    closestDifference = difference.toFixed(2);
+    if (boxscores[i].homeScore > boxscores[i].awayScore) {
+        winner = boxscores[i].homeManager 
+        loser = boxscores[i].awayManager 
+    } else {
+        loser = boxscores[i].homeManager 
+        winner = boxscores[i].awayManager 
+    };
+    closestIndex = i;
+    console.log(closestIndex)
+  }
+}
+
 /*
 const [closestWinner, setClosestWinner] = useState('');
 const [closestLoser, setClosestLoser] = useState('');
@@ -77,14 +100,19 @@ const combinedItems = [];
 //console.log(boxscores);
     return (
         <>
-        <section>
+        <section className="stat-card-container">
         <div className="stat-card">
             <div className="card-title">
                 <h3>Average Score</h3>
             </div>
-            <p>The average total score for the week was {averageScore} points</p>
+            <p>{averageScore} points</p>
         </div>
-
+        <div className="stat-card">
+            <div className="card-title">
+              <h3>Closest Game</h3>
+            </div>
+            <p>{winner} beat {loser} <br/>by {closestDifference} points</p>
+          </div>
         </section>
         </>
     )

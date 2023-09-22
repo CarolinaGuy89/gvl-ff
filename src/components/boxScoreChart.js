@@ -9,7 +9,7 @@ export default function ChartComponent({ boxscores }) {
     if (chartRef.current) {
       chartRef.current.destroy();
     }
-    Chart.defaults.font.size = 16;
+    Chart.defaults.font.size = 14;
     Chart.defaults.color = '#fff';
     // Create the new chart
     //console.log(boxscores)
@@ -18,19 +18,18 @@ export default function ChartComponent({ boxscores }) {
     const homeScore = boxscores.map((boxscore) => boxscore.homeScore);
     const homeResult = boxscores.map((boxscore) => boxscore.homeResult);
     const homeManager = boxscores.map((boxscore) => boxscore.homeManager);
-
+    const homeLabel = boxscores.map((boxscore) =>boxscore.homeResult === "LimeGreen" ? "Winner" : 'Loser');
     const awayScore = boxscores.map((boxscore) => boxscore.awayScore);
     const awayResult = boxscores.map((boxscore) => boxscore.awayResult);
     const awayManager = boxscores.map((boxscore) => boxscore.awayManager);
+    const awayLabel = boxscores.map((boxscore) =>boxscore.awayResult === "LimeGreen" ? "Winner" : 'Loser');
 
     const canvas = document.getElementById('boxscoreChart');
-    
-
     chartRef.current = new Chart(canvas, {
       type: 'bar',
       grouped: false,
       data: {
-        labels: boxscores.map((_, index) => [`${homeManager[index]}`,`${awayManager[index]}`]),
+        labels: boxscores.map((_, index) => [`${homeManager[index]} vs. ${awayManager[index]}`]),
         datasets: [
           {
             label: 'Loser',
@@ -46,7 +45,35 @@ export default function ChartComponent({ boxscores }) {
           },
         ],
       },
-      options: {
+      options: {       
+        plugins: {
+          tooltip: {
+              callbacks: {
+                label: function(context) {
+                    // Customize tool tip labels based on the dataset index                    
+                    const labelIndex = context.dataIndex;
+                    const datasetIndex = context.datasetIndex;
+                    if (datasetIndex === 0) {
+                      return `${homeLabel[labelIndex]}: ${homeScore[labelIndex]}`;
+                    } else if (datasetIndex === 1) {
+                      return `${awayLabel[labelIndex]}: ${awayScore[labelIndex]}`;
+                    }                    
+                  },
+                  beforeLabel: function(context){
+                  // Customize tool tip titles based on the dataset index
+                  const labelIndex = context.dataIndex;
+                  const datasetIndex = context.datasetIndex;
+                  if (datasetIndex === 0) {
+                    return `${homeManager[labelIndex]}`;
+                  } else if (datasetIndex === 1) {
+                    return `${awayManager[labelIndex]}`;
+                  }
+                }
+              }
+          },
+          legend: {display: false,
+          },
+      },
         indexAxis: 'x',
         scales: {
           y: {
