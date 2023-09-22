@@ -16,7 +16,6 @@ export default function MatchupBoxes({ boxscores }) {
     }, [boxscores]); // Update when boxscores change
 
 //Closest Game
-
 let closestIndex = -1;
 let closestDifference = Infinity;
 let winner = 'Loading...';
@@ -39,6 +38,44 @@ for (let i = 0; i < boxscores.length; i++) {
   }
 }
 
+//Highest Scoring Loser
+var awayLabel ='na'
+let highLoserIndex = -1
+let highLoserSalt = -1
+let highLoserScore = -1
+var highLoserName = 'Loading'
+const combinedItems = [];
+    boxscores.forEach((item,i) => {
+        // Create new objects for home and away items
+        const homeItem = {
+        teamType: "home",
+        score: item.homeScore,
+        teamId: item.homeTeamId,
+        result: item.homeResult === "LimeGreen" ?"Winner" : 'Loser',
+        matchId: item.matchId,
+        manager: item.homeManager,
+        };
+    
+        const awayItem = {
+        teamType: "away",
+        score: item.awayScore,
+        teamId: item.awayTeamId,
+        result: item.awayResult === "LimeGreen" ?"Winner" : 'Loser',
+        matchId: item.matchId,
+        manager: item.awayManager,
+        
+        };
+        
+        // Push the objects into the combined array
+        combinedItems.push(homeItem);
+        combinedItems.push(awayItem);
+        combinedItems.sort((a, b) => b.score-a.score);
+        highLoserIndex = combinedItems.findIndex((element) => element.result == 'Loser')
+        highLoserName = combinedItems[highLoserIndex].manager
+        highLoserScore = combinedItems[highLoserIndex].score
+        highLoserSalt = combinedItems.length-(highLoserIndex+1)
+  });
+console.log('Array',combinedItems);
 /*
 const [closestWinner, setClosestWinner] = useState('');
 const [closestLoser, setClosestLoser] = useState('');
@@ -114,6 +151,23 @@ const combinedItems = [];
             <p>{winner} beat {loser} <br/>by {closestDifference} points</p>
           </div>
         </section>
+        <section className="stat-card-container">
+        <div className="stat-card">
+            <div className="card-title">
+                <h3>Highest Scoing Loser</h3>
+            </div>
+            <p>{highLoserName} scored {highLoserScore} points<br/>Would have beat {highLoserSalt} other teams</p>
+        </div>
+
+        </section>
         </>
     )
 }
+/*
+        <div className="stat-card">
+            <div className="card-title">
+              <h3>Lowest Scoing Winner</h3>
+            </div>
+            <p>x scored y points<br/>Would have loss to # other teams</p>
+          </div>
+          */
