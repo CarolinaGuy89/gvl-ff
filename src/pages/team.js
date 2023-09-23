@@ -1,6 +1,6 @@
-import {determineOwner} from '../components/teamowners'
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+//import {determineOwner} from '../components/teamowners'
+import React from 'react';
+//import { Link } from 'react-router-dom';
 //import { Client } from "espn-fantasy-football-api/node-dev.js";
 //import { leagueData } from './api/functions.js'
 

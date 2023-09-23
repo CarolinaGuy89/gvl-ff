@@ -1,9 +1,9 @@
 import '../App.css'
-import React, { useState, useEffect  } from 'react';
-import handleChangeLeagueId from '../App'
+import React, { useState, useEffect, useCallback  } from 'react';
+//import handleChangeLeagueId from '../App'
 
 function SiteHeader({ onLeagueIdChange }) {
-    const [league, setLeague] = useState();
+    // const [league, setLeague] = useState();
     const [pageTitle, setPageTitle] = useState();
     const [selectedButton, setSelectedButton] = useState('gvl');
   
@@ -27,6 +27,7 @@ function SiteHeader({ onLeagueIdChange }) {
           break
       }
     }
+
 
       // Use useEffect to select the first button on page load
   useEffect(() => {

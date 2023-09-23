@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 //import logo from '../../images/field-logo.png'
 export default function Navbar() {
     const [menuVis, setMenuVis] = useState("false")
-    const [page, setPage] = useState('')
+    const [page, setPage] = useState('home')
 
     function changePage(newPage) {
         if(menuVis === 'true') {
@@ -11,13 +11,6 @@ export default function Navbar() {
         }
         setPage(newPage)
     }
-/*
-    // Use useEffect to select the first button on page load/*
-    useEffect(() => {
-        changeLeague(selectedButton);
-    }, []); // Empty dependency array ensures this effect runs once on moun
-    */
-
 
 return(
     <>

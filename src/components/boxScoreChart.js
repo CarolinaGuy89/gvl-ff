@@ -13,7 +13,7 @@ export default function ChartComponent({ boxscores }) {
     Chart.defaults.color = '#fff';
     // Create the new chart
     //console.log(boxscores)
-    const matchId = boxscores.map((boxscore) => boxscore.matchId);
+    //const matchId = boxscores.map((boxscore) => boxscore.matchId);
 
     const homeScore = boxscores.map((boxscore) => boxscore.homeScore);
     const homeResult = boxscores.map((boxscore) => boxscore.homeResult);
@@ -78,9 +78,13 @@ export default function ChartComponent({ boxscores }) {
         scales: {
           y: {
             beginAtZero: true,
+            grid: {
+              lineWidth: 2,
+              color: 'rgba(255, 255, 255, 1)'
+            }
+            }
           },
         },
-      },
     });
   }, [boxscores]);
 

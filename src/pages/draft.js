@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import family from '../components/data/draft/family-draft2023.json'
-import gvl from '../components/data/draft/gvl-draft2023.json'
-import work from '../components/data/draft/work-draft2023.json'
-import Table from '../components/draftTable'
+import React from 'react';
+//import family from '../components/data/draft/family-draft2023.json'
+//import gvl from '../components/data/draft/gvl-draft2023.json'
+//import work from '../components/data/draft/work-draft2023.json'
+//import Table from '../components/draftTable'
 
 export default function Draft({ leagueId }) {
 /*    const [draft, setDraft] = useState([]);

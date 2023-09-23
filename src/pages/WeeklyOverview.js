@@ -15,23 +15,12 @@ const chartCss = {
 
 export default function Home({ leagueId }) {
   const [weeklyMatchup, setWeeklyMatchup] = useState([]);
-  const [teamScores, setTeamScores] = useState([]);
   const [selectedWeek, setSelectedWeek] = useState(1);
-  //Import from dkempen
-  const [arry, setArry] = useState([])
-  const [margin, setMargin] = useState([])
-  const [win, setWin] = useState([])
-
-  const [minWinner, setMinWinner] = useState([]) // 0 = owner name, 1 = score
-  const [maxLoser, setMaxLoser] = useState([]) // 0 = owner name, 1 = score
-  const [beatMin, setBeatMin] = useState(0)
-  const [loseMax, setLoseMax] = useState(0)
-  //End import
 
   let id = leagueId;
   const myClient = new Client({ leagueId: id });
 
-  // Define the length of the season, from week 1 to 17
+  // Define the length of the season, from week 1 to 17. Single week playoffs
   const weekNumbers = Array.from({ length: 17 }, (_, index) => index + 1);
 
   // Function to handle dropdown selection change
@@ -76,9 +65,9 @@ export default function Home({ leagueId }) {
 } else {
   return (
   <>
-    <div className='selectWeek-dropdown'>
-      <label htmlFor="weekDropdown">Select Week:  </label>
-      <select id="weekDropdown" onChange={handleWeekChange} value={selectedWeek}>
+    <div className='selectWeek'>
+      <label className="weekDropdownTitle">Select Week:  </label>
+      <select id="weekDropdownBox" onChange={handleWeekChange} value={selectedWeek}>
         {weekNumbers.map((weekNumber) => (
           <option key={weekNumber} value={weekNumber}>Week #{weekNumber}</option>
         ))}
@@ -87,7 +76,7 @@ export default function Home({ leagueId }) {
     <section>
       <MatchupBoxes boxscores={weeklyMatchup} />
     </section>
-    <div style={chartCss}>
+    <div className='matchupChart'>
       <ChartComponent boxscores={weeklyMatchup} />
     </div>
   </>

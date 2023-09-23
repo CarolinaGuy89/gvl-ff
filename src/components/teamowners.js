@@ -1,7 +1,6 @@
 
 export function determineOwner (leagueId, teamid){ 
     var manager = "name";
-    var teamName ='x';
     switch(leagueId) {
     //GVL
     case 1248073066:

@@ -1,12 +1,11 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
-import React, { useState, useEffect  } from 'react';
+import React, { useState } from 'react';
 import SiteHeader from './components/SiteHeader';
 import Team from './pages/team.js'
 import Draft from './pages/draft'
 import WeeklyOverview from './pages/WeeklyOverview.js'
 import Navbar from './components/navbar';
-import { Link } from 'react-router-dom';
 
 function App() {
     const [leagueId, setLeagueId] = useState(1248073066);
