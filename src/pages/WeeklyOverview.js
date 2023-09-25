@@ -5,17 +5,20 @@ import ChartComponent from '../components/boxScoreChart';
 import { determineOwner } from '../components/teamowners';
 import MatchupBoxes from '../components/MatchupBoxes';
 
-const chartCss = {
-  backgroundColor: 'rgba(0, 0, 0, 0.6)',
-  color: 'rgb(187, 255, 178)',
-  FontSize: '18px'
-}
-//
-
+  // Function to calculate the default week
+  function calculateDefaultWeek() {
+    const currentDate = new Date();
+    const startOfWeek1 = new Date('2023-09-07'); // Change this date to your season start date
+    const millisecondsInAWeek = 7 * 24 * 60 * 60 * 1000;
+    const weeksSinceStart = Math.floor((currentDate - startOfWeek1) / millisecondsInAWeek);
+    
+    // Ensure the week number is between 1 and 17 (or your season's max week)
+    return Math.min(Math.max(weeksSinceStart + 1, 1), 17);
+  }
 
 export default function Home({ leagueId }) {
   const [weeklyMatchup, setWeeklyMatchup] = useState([]);
-  const [selectedWeek, setSelectedWeek] = useState(1);
+  const [selectedWeek, setSelectedWeek] = useState(calculateDefaultWeek());
 
   let id = leagueId;
   const myClient = new Client({ leagueId: id });
@@ -37,10 +40,10 @@ export default function Home({ leagueId }) {
         scoringPeriodId: selectedWeek 
     }).then((matchup) => {
         matchup.forEach(element => {
-        delete element.homeRoster
-        delete element.awayRoster
+        // delete element.homeRoster
+        // delete element.awayRoster
     });
-
+    console.log(matchup);
     matchup.forEach((element, i) => {
       if (element.homeScore > element.awayScore) {
         element.homeResult = 'LimeGreen' //Win
@@ -56,6 +59,7 @@ export default function Home({ leagueId }) {
       element.homeManager = determineOwner(leagueId, element.homeTeamId),
       element.awayManager = determineOwner(leagueId, element.awayTeamId)
     ])
+
     setWeeklyMatchup(matchup);
     });
   }, [leagueId, selectedWeek]);//update whenever leagueId or selectedWeek changes
