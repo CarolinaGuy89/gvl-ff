@@ -98,13 +98,13 @@ console.log('Array',combinedItems);
         <section className="stat-card-container">
         <div className="stat-card">
             <div className="card-title">
-                <h3>Highest Scoing Loser</h3>
+                <h3>Highest Scoring Loser</h3>
             </div>
             <p>{highLoserName} scored {highLoserScore} points,<br/>would have beat {highLoserSalt} {highLoserSalt === 1 ? "other":"others"}</p>
         </div>
         <div className="stat-card">
             <div className="card-title">
-              <h3>Lowest Scoing Winner</h3>
+              <h3>Lowest Scoring Winner</h3>
             </div>
             <p>{lowWinName} won with only {lowWinScore} points,<br/>would have lost to {lowWinSalt} {lowWinSalt === 1 ? "other":"others"}</p>
           </div>
