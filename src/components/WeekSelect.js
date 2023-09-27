@@ -12,7 +12,7 @@ export function calculateDefaultWeek() {
     return Math.min(Math.max(weeksSinceStart + 1, 1), 17);
 }
 
-export default function SelectWeek() {
+export function SelectWeek({ onWeekChange }) {
     const [selectedWeek, setSelectedWeek] = useState(calculateDefaultWeek());
 
     // Define the length of the season, from week 1 to 17. Single week playoffs
@@ -21,6 +21,7 @@ export default function SelectWeek() {
     // Function to handle dropdown selection change
     const handleWeekChange = (event) => {
     setSelectedWeek(parseInt(event.target.value, 10));
+    onWeekChange(selectedWeek)
     };
 
 return(

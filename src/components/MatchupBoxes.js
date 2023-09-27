@@ -11,24 +11,36 @@ export default function MatchupBoxes({ boxscores }) {
     }, [boxscores]); // Update when boxscores change
 
 //Closest Game
-let closestDifference = Infinity;
-let winner = 'Loading...';
-let loser = 'Loading...';
 
-for (let i = 0; i < boxscores.length; i++) {
-  const difference = Math.abs(boxscores[i].homeScore - boxscores[i].awayScore);
+let closestGameText = 'Week has not started'
+  
 
-  if (difference < closestDifference) {
-    closestDifference = difference.toFixed(2);
-    if (boxscores[i].homeScore > boxscores[i].awayScore) {
-        winner = boxscores[i].homeManager 
-        loser = boxscores[i].awayManager 
-    } else {
-        loser = boxscores[i].homeManager 
-        winner = boxscores[i].awayManager 
-    };
-  }
-}
+const closestMatch = boxscores.reduce((closest, current) => {
+    const difference = Math.abs(current.homeScore - current.awayScore);
+  
+    if (difference < closest.difference) {
+      closest.difference = difference.toFixed(2);
+      if (current.homeScore > current.awayScore) {
+        closest.winner = current.homeManager;
+        closest.loser = current.awayManager;
+      } else if (current.homeScore < current.awayScore) {
+        closest.winner = current.awayManager;
+        closest.loser = current.homeManager;
+      } else {
+        closest.winner = null;
+        closest.loser = null;
+      }
+    }
+  
+    return closest;
+  }, {
+    difference: Infinity,
+    winner: '',
+    loser: '',
+  });
+  const closestDifference = closestMatch.difference;
+  const winner = closestMatch.winner;
+  const loser = closestMatch.loser;
 
 //Highest Scoring Loser
     let highLoserIndex = -1
@@ -39,46 +51,53 @@ for (let i = 0; i < boxscores.length; i++) {
     let lowWinSalt = -1
     let lowWinScore = -1
     var lowWinName = 'Loading'
+
     const combinedItems = [];
         boxscores.forEach((item) => {
             // Create new objects for home and away items
             const homeItem = {
-            teamType: "home",
             score: item.homeScore,
-            teamId: item.homeTeamId,
             result: item.homeResult === "Win" ?"Winner" : 'Loser',
-            matchId: item.matchId,
-            manager: item.homeManager,
+            manager: item.homeManager
             };
         
             const awayItem = {
-            teamType: "away",
             score: item.awayScore,
-            teamId: item.awayTeamId,
             result: item.awayResult === "Win" ?"Winner" : 'Loser',
-            matchId: item.matchId,
-            manager: item.awayManager,
-            
+            manager: item.awayManager
             };
             
             // Push the objects into the combined array
             combinedItems.push(homeItem);
             combinedItems.push(awayItem);
             combinedItems.sort((a, b) => b.score-a.score);
-            highLoserIndex = combinedItems.findIndex((element) => element.result === 'Loser')
-            highLoserName = combinedItems[highLoserIndex].manager
-            highLoserScore = combinedItems[highLoserIndex].score
-            highLoserSalt = combinedItems.length-(highLoserIndex+1)
-
+            
             //Lowest scoring Winner
+            highLoserIndex = combinedItems.findIndex((element) => element.result === 'Loser')
             lowWinIndex = combinedItems.findLastIndex((element) => element.result === 'Winner')
-            lowWinName = combinedItems[lowWinIndex].manager
-            lowWinScore = combinedItems[lowWinIndex].score
-            lowWinSalt = lowWinIndex
+            
+            //Check if a winner exists, otherwise no game has started yet
+            if (lowWinIndex !== -1) {
+
+                highLoserName = combinedItems[highLoserIndex].manager
+                highLoserScore = combinedItems[highLoserIndex].score
+                highLoserSalt = combinedItems.length-(highLoserIndex+1)
+
+                lowWinName = combinedItems[lowWinIndex].manager;
+                lowWinScore = combinedItems[lowWinIndex].score;
+                lowWinSalt = lowWinIndex;
+              } else {
+                highLoserName = '-'
+                highLoserScore = '-';
+                highLoserSalt = '-';
+                lowWinName = '-';
+                lowWinScore = '-'; 
+                lowWinSalt = '-'; 
+                let closestGameText = 'Week has not started'
+              }
+
     });
-
-//console.log('Array',combinedItems);
-
+    //console.log('combinedItems', combinedItems)
     return (
 <>
     <section className="stat-card-container">
@@ -88,7 +107,7 @@ for (let i = 0; i < boxscores.length; i++) {
             </div>
             <p>{averageScore} points</p>
         </div>
-        
+
         <div className="stat-card">
             <div className="card-title">
                 <h3>Closest Game</h3>

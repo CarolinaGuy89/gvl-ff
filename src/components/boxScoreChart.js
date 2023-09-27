@@ -11,10 +11,9 @@ export default function ChartComponent({ boxscores }) {
     }
     Chart.defaults.font.size = 14;
     Chart.defaults.color = '#fff';
+    
     // Create the new chart
-    //console.log(boxscores)
     //const matchId = boxscores.map((boxscore) => boxscore.matchId);
-
     const homeScore = boxscores.map((boxscore) => boxscore.homeScore);
     const homeResult = boxscores.map((boxscore) => boxscore.barColorHome);
     const homeManager = boxscores.map((boxscore) => boxscore.homeManager);
@@ -27,7 +26,7 @@ export default function ChartComponent({ boxscores }) {
     const canvas = document.getElementById('boxscoreChart');
     chartRef.current = new Chart(canvas, {
       type: 'bar',
-      grouped: false,
+      grouped: true,
       data: {
         labels: boxscores.map((_, index) => [`${homeManager[index]} vs. ${awayManager[index]}`]),
         datasets: [
