@@ -16,13 +16,13 @@ export default function ChartComponent({ boxscores }) {
     //const matchId = boxscores.map((boxscore) => boxscore.matchId);
 
     const homeScore = boxscores.map((boxscore) => boxscore.homeScore);
-    const homeResult = boxscores.map((boxscore) => boxscore.homeResult);
+    const homeResult = boxscores.map((boxscore) => boxscore.barColorHome);
     const homeManager = boxscores.map((boxscore) => boxscore.homeManager);
-    const homeLabel = boxscores.map((boxscore) =>boxscore.homeResult === "LimeGreen" ? "Winner" : 'Loser');
+    const homeLabel = boxscores.map((boxscore) =>boxscore.homeResult === "Win" ? "Winner" : 'Loser');
     const awayScore = boxscores.map((boxscore) => boxscore.awayScore);
-    const awayResult = boxscores.map((boxscore) => boxscore.awayResult);
+    const awayResult = boxscores.map((boxscore) => boxscore.barColorAway);
     const awayManager = boxscores.map((boxscore) => boxscore.awayManager);
-    const awayLabel = boxscores.map((boxscore) =>boxscore.awayResult === "LimeGreen" ? "Winner" : 'Loser');
+    const awayLabel = boxscores.map((boxscore) =>boxscore.awayResult === "Win" ? "Winner" : 'Loser');
 
     const canvas = document.getElementById('boxscoreChart');
     chartRef.current = new Chart(canvas, {

@@ -46,7 +46,7 @@ for (let i = 0; i < boxscores.length; i++) {
             teamType: "home",
             score: item.homeScore,
             teamId: item.homeTeamId,
-            result: item.homeResult === "LimeGreen" ?"Winner" : 'Loser',
+            result: item.homeResult === "Win" ?"Winner" : 'Loser',
             matchId: item.matchId,
             manager: item.homeManager,
             };
@@ -55,7 +55,7 @@ for (let i = 0; i < boxscores.length; i++) {
             teamType: "away",
             score: item.awayScore,
             teamId: item.awayTeamId,
-            result: item.awayResult === "LimeGreen" ?"Winner" : 'Loser',
+            result: item.awayResult === "Win" ?"Winner" : 'Loser',
             matchId: item.matchId,
             manager: item.awayManager,
             
@@ -77,39 +77,42 @@ for (let i = 0; i < boxscores.length; i++) {
             lowWinSalt = lowWinIndex
     });
 
-console.log('Array',combinedItems);
+//console.log('Array',combinedItems);
 
     return (
-        <>
-        <section className="stat-card-container">
+<>
+    <section className="stat-card-container">
         <div className="stat-card">
             <div className="card-title">
                 <h3>Average Score</h3>
             </div>
             <p>{averageScore} points</p>
         </div>
+        
         <div className="stat-card">
             <div className="card-title">
-              <h3>Closest Game</h3>
+                <h3>Closest Game</h3>
             </div>
-            <p>{winner} beat {loser} <br/>by {closestDifference} points</p>
-          </div>
-        </section>
-        <section className="stat-card-container">
-        <div className="stat-card">
-            <div className="card-title">
-                <h3>Highest Scoing Loser</h3>
-            </div>
-            <p>{highLoserName} scored {highLoserScore} points,<br/>would have beat {highLoserSalt} {highLoserSalt === 1 ? "other":"others"}</p>
+            <p>{winner} beat {loser} <br />by {closestDifference} points</p>
         </div>
+    </section>
+
+    <section className="stat-card-container">
         <div className="stat-card">
             <div className="card-title">
-              <h3>Lowest Scoing Winner</h3>
+                <h3>Highest Scoring Loser</h3>
             </div>
-            <p>{lowWinName} won with only {lowWinScore} points,<br/>would have lost to {lowWinSalt} {lowWinSalt === 1 ? "other":"others"}</p>
-          </div>
-        </section>
-        </>
+            <p>{highLoserName} scored {highLoserScore} points,<br />would have beat {highLoserSalt} {highLoserSalt === 1 ? "other" : "others"}</p>
+        </div>
+
+        <div className="stat-card">
+            <div className="card-title">
+                <h3>Lowest Scoring Winner</h3>
+            </div>
+            <p>{lowWinName} won with only {lowWinScore} points,<br />would have lost to {lowWinSalt} {lowWinSalt === 1 ? "other" : "others"}</p>
+        </div>
+    </section>
+</>
     )
 }
 /*

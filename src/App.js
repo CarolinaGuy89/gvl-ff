@@ -15,7 +15,6 @@ function App() {
       setLeagueId(newLeagueId);
     }
 
-
   return (
     <>
     <SiteHeader onLeagueIdChange={handleLeagueIdChange} />
