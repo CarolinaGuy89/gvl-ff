@@ -2,7 +2,7 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
 import React, { useState, useEffect, useCallback } from 'react';
 import SiteHeader from './components/SiteHeader';
-import Team from './pages/Team';
+import Team from './pages/team';
 import Draft from './pages/draft';
 import WeeklyOverview from './pages/WeeklyOverview.js';
 import Navbar from './components/navbar';
@@ -57,7 +57,7 @@ function App() {
         <Routes>
           {/* Route to the Team component */}
           <Route path="/" element={<WeeklyOverview weeklyMatchup = {weeklyMatchup} />} />
-          <Route path="/Team" element={<Team weeklyMatchup = {weeklyMatchup} />} />
+          <Route path="/team" element={<Team weeklyMatchup = {weeklyMatchup} />} />
           <Route path="/draft" element={<Draft leagueId ={leagueId} />} />
 
           {/* Other routes can be added here */}
