@@ -1,4 +1,4 @@
-import { Client } from 'espn-fantasy-football-api';
+import { Client } from 'espn-fantasy-football-api/web.js';
 import { determineOwner } from '../components/teamowners';
 
 export const getBoxscoreForWeek = async (leagueId, selectedWeek) => {
