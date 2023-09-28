@@ -11,17 +11,17 @@ export default function ChartComponent({ boxscores }) {
     }
     Chart.defaults.font.size = 14;
     Chart.defaults.color = '#fff';
-    
+
     // Create the new chart
     //const matchId = boxscores.map((boxscore) => boxscore.matchId);
     const homeScore = boxscores.map((boxscore) => boxscore.homeScore);
     const homeResult = boxscores.map((boxscore) => boxscore.barColorHome);
     const homeManager = boxscores.map((boxscore) => boxscore.homeManager);
-    const homeLabel = boxscores.map((boxscore) =>boxscore.homeResult === "Win" ? "Winner" : 'Loser');
+    const homeLabel = boxscores.map((boxscore) => boxscore.homeResult === "Win" ? "Winner" : 'Loser');
     const awayScore = boxscores.map((boxscore) => boxscore.awayScore);
     const awayResult = boxscores.map((boxscore) => boxscore.barColorAway);
     const awayManager = boxscores.map((boxscore) => boxscore.awayManager);
-    const awayLabel = boxscores.map((boxscore) =>boxscore.awayResult === "Win" ? "Winner" : 'Loser');
+    const awayLabel = boxscores.map((boxscore) => boxscore.awayResult === "Win" ? "Winner" : 'Loser');
 
     const canvas = document.getElementById('boxscoreChart');
     chartRef.current = new Chart(canvas, {
@@ -44,35 +44,36 @@ export default function ChartComponent({ boxscores }) {
           },
         ],
       },
-      options: {       
+      options: {
         plugins: {
           tooltip: {
-              callbacks: {
-                label: function(context) {
-                    // Customize tool tip labels based on the dataset index                    
-                    const labelIndex = context.dataIndex;
-                    const datasetIndex = context.datasetIndex;
-                    if (datasetIndex === 0) {
-                      return `${homeLabel[labelIndex]}: ${homeScore[labelIndex]}`;
-                    } else if (datasetIndex === 1) {
-                      return `${awayLabel[labelIndex]}: ${awayScore[labelIndex]}`;
-                    }                    
-                  },
-                  beforeLabel: function(context){
-                  // Customize tool tip titles based on the dataset index
-                  const labelIndex = context.dataIndex;
-                  const datasetIndex = context.datasetIndex;
-                  if (datasetIndex === 0) {
-                    return `${homeManager[labelIndex]}`;
-                  } else if (datasetIndex === 1) {
-                    return `${awayManager[labelIndex]}`;
-                  }
+            callbacks: {
+              label: function (context) {
+                // Customize tool tip labels based on the dataset index                    
+                const labelIndex = context.dataIndex;
+                const datasetIndex = context.datasetIndex;
+                if (datasetIndex === 0) {
+                  return `${homeLabel[labelIndex]}: ${homeScore[labelIndex]}`;
+                } else if (datasetIndex === 1) {
+                  return `${awayLabel[labelIndex]}: ${awayScore[labelIndex]}`;
+                }
+              },
+              beforeLabel: function (context) {
+                // Customize tool tip titles based on the dataset index
+                const labelIndex = context.dataIndex;
+                const datasetIndex = context.datasetIndex;
+                if (datasetIndex === 0) {
+                  return `${homeManager[labelIndex]}`;
+                } else if (datasetIndex === 1) {
+                  return `${awayManager[labelIndex]}`;
                 }
               }
+            }
           },
-          legend: {display: false,
+          legend: {
+            display: false,
           },
-      },
+        },
         indexAxis: 'x',
         scales: {
           y: {
@@ -81,55 +82,12 @@ export default function ChartComponent({ boxscores }) {
               lineWidth: 2,
               color: 'rgba(255, 255, 255, 1)'
             }
-            }
-          },
-        },
-    });
-  }, [boxscores]);
-
-
-
-
-
-
-
-
-/*    const scores = boxscores.map((boxscore) => boxscore.score);
-    const teamManager = boxscores.map((boxscore) => boxscore.manager);
-    const resultColor = boxscores.map((boxscore) => boxscore.result);
-
-    const canvas = document.getElementById('boxscoreChart');
-    
-
-    chartRef.current = new Chart(canvas, {
-      type: 'bar',
-      data: {
-        labels: boxscores.map((_, index) => `${teamManager[index]}`),
-        datasets: [
-          {
-            label: 'Score',
-            data: scores,
-            backgroundColor: resultColor,
-            borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        layout: {
-          padding: {
-            right: 200
           }
         },
-        indexAxis: 'y',
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
       },
     });
   }, [boxscores]);
-*/
+
   return (
     <div>
       <h2>Weekly Matchups</h2>

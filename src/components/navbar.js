@@ -24,6 +24,7 @@ return(
     <Link to="/draft" onClick={() => changePage("draft")}
         className={page === 'draft' ? 'selected' : ''}>Draft</Link>
     </div>
+    
     </>
     )
 }

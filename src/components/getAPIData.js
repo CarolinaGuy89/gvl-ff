@@ -61,7 +61,7 @@ export const getBoxscoreForWeek = async (leagueId, selectedWeek) => {
             element.awayManager = determineOwner(leagueId, element.awayTeamId)
         }
         );
-
+        console.log('-------------API CALL------------')
         return matchup;
     } catch (error) {
         console.error('Error fetching boxscore data:', error);

@@ -4,8 +4,8 @@ import MatchupBoxes from '../components/MatchupBoxes';
 import { calculateDefaultWeek } from '../components/WeekSelect';
 import { getBoxscoreForWeek } from '../components/getAPIData';
 
-export default function Home({ leagueId }) {
-  const [weeklyMatchup, setWeeklyMatchup] = useState();
+export default function Home({weeklyMatchup}) {
+  // const [weeklyMatchup, setWeeklyMatchup] = useState();
   const [selectedWeek, setSelectedWeek] = useState(calculateDefaultWeek);
 
   // Define the length of the season, from week 1 to 17. Single week playoffs
@@ -16,29 +16,12 @@ export default function Home({ leagueId }) {
     setSelectedWeek(parseInt(event.target.value, 10));
   };
 
-  // Use useEffect to update the state after the component has rendered
-  useEffect(() => {
-    getBoxscoreForWeek(leagueId,selectedWeek).then((matchup) => {
-      // console.log('matchup: ', matchup);
-      setWeeklyMatchup(matchup);
-    })}, [leagueId, selectedWeek]);//Request new Data at change of League or week
-
-
-//console.log('weeklyMatchup: ', weeklyMatchup);
-  if (!weeklyMatchup) {
-    return null;
+  console.log(weeklyMatchup)
+  if (weeklyMatchup === undefined) {
+    return 'Loading...';
   } else {
     return (
       <>
-        <div className='selectWeek'>
-          <label className="weekDropdownTitle">Select Week:  </label>
-          <select id="weekDropdownBox" onChange={handleWeekChange} value={selectedWeek}>
-            {weekNumbers.map((weekNumber) => (
-              <option key={weekNumber} value={weekNumber}>Week #{weekNumber}</option>
-            ))}
-          </select>
-        </div>
-
         <section>
           <MatchupBoxes boxscores={weeklyMatchup} />
         </section>
