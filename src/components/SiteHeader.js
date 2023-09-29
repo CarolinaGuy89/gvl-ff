@@ -37,6 +37,7 @@ function SiteHeader({ handleLeagueChange }) {
   const navigate = useNavigate();
   const [pageTitle, setPageTitle] = useState();
   const [selectedButton, setSelectedButton] = useState();
+  const [selectedLeague, setSelectedLeague] = useState();
   const [leagueId, setLeagueId] = useState();
   //const [weeklyMatchup, setWeeklyMatchup] = useState();
   const [selectedWeek, setSelectedWeek] = useState(calculateDefaultWeek);
@@ -51,8 +52,8 @@ function SiteHeader({ handleLeagueChange }) {
     }
   }, [leagueId, selectedWeek]);//Request new Data at change of League or week  
 
-  function changeLeague(selectedButton) {
-    switch (selectedButton) {
+  function changeLeague(selectedLeague) {
+    switch (selectedLeague) {
       case "gvl"://a.in This text is code internal
         setPageTitle("G-Vegas Fantasy Football");
         navigate('/gvl'); // This text display in URL Bar
@@ -75,6 +76,7 @@ function SiteHeader({ handleLeagueChange }) {
         setLeagueId(1335739020);
         break
       default:
+        setPageTitle("GVL Fantasy Football Stats");
         break;
     }
   }
@@ -82,31 +84,31 @@ function SiteHeader({ handleLeagueChange }) {
 
   // Use useEffect to select the first button on page load
   useEffect(() => {
-    changeLeague(selectedButton);
-  }, [selectedButton]); // Empty dependency array ensures this effect runs once on mount
+    changeLeague(selectedLeague);
+  }, [selectedLeague]); // Empty dependency array ensures this effect runs once on mount
 
   return (
     <>
       <h1 className="siteHeader">{pageTitle}</h1>
       <div className="league-bar">
         <button onClick={() => {
-          setSelectedButton('gvl');//a.out This text is code internal
+          setSelectedLeague('gvl');//a.out This text is code internal
         }}
-          className={selectedButton === 'gvl' ? 'selected' : ''}>G-Vegas</button>
+          className={selectedLeague === 'gvl' ? 'selected' : ''}>G-Vegas</button>
 
         <button onClick={() => {
-          setSelectedButton('family');
+          setSelectedLeague('family');
         }}
-          className={selectedButton === 'family' ? 'selected' : ''}>League of Family Drama</button>
+          className={selectedLeague === 'family' ? 'selected' : ''}>League of Family Drama</button>
 
         <button onClick={() => {
-          setSelectedButton('work');
+          setSelectedLeague('work');
         }}
-          className={selectedButton === 'work' ? 'selected' : ''}>Logistically, IT&apos;s complicated</button>
+          className={selectedLeague === 'work' ? 'selected' : ''}>Logistically, IT&apos;s complicated</button>
         <button onClick={() => {
-          setSelectedButton('hockey');
+          setSelectedLeague('hockey');
         }}
-          className={selectedButton === 'hockey' ? 'selected' : ''}>Full Contact Turf Hockey</button>
+          className={selectedLeague === 'hockey' ? 'selected' : ''}>Full Contact Turf Hockey</button>
       </div>
       <Navbar />
     </>
