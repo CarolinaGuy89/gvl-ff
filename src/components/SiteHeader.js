@@ -71,7 +71,7 @@ function SiteHeader({ handleLeagueChange }) {
         setLeagueId(601844230);
         break
       case "hockey":
-        setPageTitle("Turf Hockey Fantasy Football");
+        setPageTitle("Full Contact Turf Hockey");
         navigate('/hockey');
         setLeagueId(1335739020);
         break
@@ -89,7 +89,8 @@ function SiteHeader({ handleLeagueChange }) {
 
   return (
     <>
-      <h1 className="siteHeader">{pageTitle}</h1>
+    <section className='SiteHeader'>
+      <h1 className="pageTitle">{pageTitle}</h1>
       <div className="league-bar">
         <button onClick={() => {
           setSelectedLeague('gvl');//a.out This text is code internal
@@ -108,8 +109,9 @@ function SiteHeader({ handleLeagueChange }) {
         <button onClick={() => {
           setSelectedLeague('hockey');
         }}
-          className={selectedLeague === 'hockey' ? 'selected' : ''}>Full Contact Turf Hockey</button>
+          className={selectedLeague === 'hockey' ? 'selected' : ''}>Turf Hockey</button>
       </div>
+      </section>
       <Navbar />
     </>
   );
