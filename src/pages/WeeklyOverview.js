@@ -4,7 +4,7 @@ import MatchupBoxes from '../components/MatchupBoxes';
 import { calculateDefaultWeek } from '../components/WeekSelect';
 import { getBoxscoreForWeek } from '../components/getAPIData';
 
-export default function Home({weeklyMatchup}) {
+export default function createWeeklyOverview({weeklyMatchup}) {
   // const [weeklyMatchup, setWeeklyMatchup] = useState();
   const [selectedWeek, setSelectedWeek] = useState(calculateDefaultWeek);
 

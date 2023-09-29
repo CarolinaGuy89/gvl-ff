@@ -6,7 +6,7 @@ import Team from './pages/team';
 import Draft from './pages/draft';
 import WeeklyOverview from './pages/WeeklyOverview.js';
 import { calculateDefaultWeek } from './components/WeekSelect';
-
+import Home from './pages/Home';
 
 function App() {
     const [leagueId, setLeagueId] = useState(1248073066);
@@ -28,7 +28,8 @@ function App() {
           <Route path="/family" element={<WeeklyOverview weeklyMatchup = {weeklyMatchup} />} />
           <Route path="/it" element={<WeeklyOverview weeklyMatchup = {weeklyMatchup} />} />
           <Route path="/hockey" element={<WeeklyOverview weeklyMatchup = {weeklyMatchup} />} />
-          <Route path="/team" element={<Team weeklyMatchup = {weeklyMatchup} />} />        
+          <Route path="/team" element={<Team weeklyMatchup = {weeklyMatchup} />} />
+          <Route path="/" element={<Home />} />
         </Routes>
     </Router>
     </>
