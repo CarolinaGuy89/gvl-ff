@@ -17,18 +17,15 @@ let closestGameText = 'Week has not started'
 
 const closestMatch = boxscores.reduce((closest, current) => {
     const difference = Math.abs(current.homeScore - current.awayScore);
-  
+    console.log(current.homeScore - current.awayScore)
     if (difference < closest.difference) {
       closest.difference = difference.toFixed(2);
-      if (current.homeScore > current.awayScore) {
+      if (current.homeScore >= current.awayScore) {
         closest.winner = current.homeManager;
         closest.loser = current.awayManager;
       } else if (current.homeScore < current.awayScore) {
         closest.winner = current.awayManager;
         closest.loser = current.homeManager;
-      } else {
-        closest.winner = null;
-        closest.loser = null;
       }
     }
   
@@ -38,9 +35,9 @@ const closestMatch = boxscores.reduce((closest, current) => {
     winner: '',
     loser: '',
   });
-  const closestDifference = closestMatch.difference;
-  const winner = closestMatch.winner;
-  const loser = closestMatch.loser;
+  let closestDifference = closestMatch.difference;
+  let winner = closestMatch.winner;
+  let loser = closestMatch.loser;
 
 //Highest Scoring Loser
     let highLoserIndex = -1

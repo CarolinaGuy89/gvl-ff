@@ -3,7 +3,6 @@ import { determineOwner } from '../components/teamowners';
 
 export const getBoxscoreForWeek = async (leagueId, selectedWeek) => {
     const myClient = new Client({ leagueId });
-
     try {
         var matchup = await myClient.getBoxscoreForWeek({
             seasonId: 2023,
@@ -61,7 +60,8 @@ export const getBoxscoreForWeek = async (leagueId, selectedWeek) => {
             element.awayManager = determineOwner(leagueId, element.awayTeamId)
         }
         );
-        console.log('-------------API CALL------------')
+        console.log('-------------API CALL------------');
+        console.log(matchup);
         return matchup;
     } catch (error) {
         console.error('Error fetching boxscore data:', error);

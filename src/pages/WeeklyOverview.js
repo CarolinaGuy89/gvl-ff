@@ -16,7 +16,6 @@ export default function Home({weeklyMatchup}) {
     setSelectedWeek(parseInt(event.target.value, 10));
   };
 
-  console.log(weeklyMatchup)
   if (weeklyMatchup === undefined) {
     return 'Loading...';
   } else {
