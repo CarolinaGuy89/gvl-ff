@@ -3,44 +3,16 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getBoxscoreForWeek } from './getAPIData';
 import { calculateDefaultWeek } from './WeekSelect';
-
-
-function Navbar() {
-  const [menuVis, setMenuVis] = useState("false")
-  const [page, setPage] = useState('home')
-
-  function changePage(newPage) {
-    if (menuVis === 'true') {
-      setMenuVis('false')
-    }
-    setPage(newPage)
-  }
-
-  return (
-    <>
-      <div className="topnav">
-        <Link to="/" onClick={() => changePage("home")}
-          className={page === 'home' ? 'selected' : ''}>Weekly Matchups</Link>
-
-        {/*<Link to="/team" onClick={() => changePage("team")}
-          className={page === 'team' ? 'selected' : ''}><i>Team Overview</i></Link>
-  
-        <Link to="/draft" onClick={() => changePage("draft")}
-            className={page === 'draft' ? 'selected' : ''}><i>Draft</i></Link>*/}
-      </div>
-
-    </>
-  )
-}
+import { Outlet } from 'react-router-dom';
+import { WeekSelector } from './WeekSelect';
 
 function SiteHeader({ handleLeagueChange }) {
   const navigate = useNavigate();
   const [pageTitle, setPageTitle] = useState();
-  const [selectedButton, setSelectedButton] = useState();
   const [selectedLeague, setSelectedLeague] = useState();
   const [leagueId, setLeagueId] = useState();
-  //const [weeklyMatchup, setWeeklyMatchup] = useState();
   const [selectedWeek, setSelectedWeek] = useState(calculateDefaultWeek);
+  const [page, setPage] = useState()
 
   useEffect(() => {
     //Don't requst API data unless leagueId is set
@@ -56,23 +28,22 @@ function SiteHeader({ handleLeagueChange }) {
     switch (selectedLeague) {
       case "gvl"://a.in This text is code internal
         setPageTitle("G-Vegas Fantasy Football");
-        navigate('/gvl'); // This text display in URL Bar
+        navigate('/gvl/matchup'); // This text display in URL Bar
         setLeagueId(1248073066);
         break
       case "family":
         setPageTitle("The League of Family Drama");
-        navigate('/family');
-        console.log("navigate family")
+        navigate('/family/matchup');
         setLeagueId(283159008);
         break
       case "work":
         setPageTitle("Logistically, IT's Complicated");
-        navigate('/it');
+        navigate('/it/matchup');
         setLeagueId(601844230);
         break
       case "hockey":
         setPageTitle("Full Contact Turf Hockey");
-        navigate('/hockey');
+        navigate('/hockey/matchup');
         setLeagueId(1335739020);
         break
       default:
@@ -112,7 +83,7 @@ function SiteHeader({ handleLeagueChange }) {
           className={selectedLeague === 'hockey' ? 'selected' : ''}>Turf Hockey</button>
       </div>
       </section>
-      <Navbar />
+
     </>
   );
 }

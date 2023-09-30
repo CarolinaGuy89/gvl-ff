@@ -11,13 +11,8 @@ export default function MatchupBoxes({ boxscores }) {
     }, [boxscores]); // Update when boxscores change
 
 //Closest Game
-
-let closestGameText = 'Week has not started'
-  
-
 const closestMatch = boxscores.reduce((closest, current) => {
     const difference = Math.abs(current.homeScore - current.awayScore);
-    console.log(current.homeScore - current.awayScore)
     if (difference < closest.difference) {
       closest.difference = difference.toFixed(2);
       if (current.homeScore >= current.awayScore) {

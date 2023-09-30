@@ -3,8 +3,9 @@ import ChartComponent from '../components/boxScoreChart';
 import MatchupBoxes from '../components/MatchupBoxes';
 import { calculateDefaultWeek } from '../components/WeekSelect';
 import { getBoxscoreForWeek } from '../components/getAPIData';
+import { WeekSelector } from '../components/WeekSelect';
 
-export default function createWeeklyOverview({weeklyMatchup}) {
+export default function WeeklyOverview({weeklyMatchup}) {
   // const [weeklyMatchup, setWeeklyMatchup] = useState();
   const [selectedWeek, setSelectedWeek] = useState(calculateDefaultWeek);
 
@@ -12,9 +13,10 @@ export default function createWeeklyOverview({weeklyMatchup}) {
   const weekNumbers = Array.from({ length: 17 }, (_, index) => index + 1);
 
   // Function to handle dropdown selection change
-  const handleWeekChange = (event) => {
-    setSelectedWeek(parseInt(event.target.value, 10));
-  };
+  // const handleWeekChange = (event) => {
+  //   setSelectedWeek(parseInt(event.target.value, 10));
+  // };
+ 
 
   if (weeklyMatchup === undefined) {
     return 'Loading...';
@@ -27,6 +29,7 @@ export default function createWeeklyOverview({weeklyMatchup}) {
         <div className='matchupChart'>
           <ChartComponent boxscores={weeklyMatchup} />
         </div>
+
       </>
     );
   }

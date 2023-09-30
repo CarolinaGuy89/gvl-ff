@@ -6,6 +6,7 @@ import Team from './pages/team';
 import Draft from './pages/draft';
 import WeeklyOverview from './pages/WeeklyOverview.js';
 import { calculateDefaultWeek } from './components/WeekSelect';
+import LeagueHome from './pages/LeagueHome';
 import Home from './pages/Home';
 
 function App() {
@@ -24,11 +25,23 @@ function App() {
         {/*<WeekSelector onWeekChange={handleWeekChange}/>*/}
         <Routes>
           {/* League Routes */}
-          <Route path="/gvl" element={<WeeklyOverview weeklyMatchup = {weeklyMatchup} />} />
-          <Route path="/family" element={<WeeklyOverview weeklyMatchup = {weeklyMatchup} />} />
-          <Route path="/it" element={<WeeklyOverview weeklyMatchup = {weeklyMatchup} />} />
-          <Route path="/hockey" element={<WeeklyOverview weeklyMatchup = {weeklyMatchup} />} />
-          <Route path="/team" element={<Team weeklyMatchup = {weeklyMatchup} />} />
+          <Route path="/gvl" element={<LeagueHome weeklyMatchup = {weeklyMatchup} />}>
+            <Route path="matchup" element={<WeeklyOverview weeklyMatchup = {weeklyMatchup} />}/>
+            <Route path="team" element={<Team weeklyMatchup = {weeklyMatchup} />} />
+          </Route>
+          <Route path="/family" element={<LeagueHome weeklyMatchup = {weeklyMatchup} />} >
+            <Route path="matchup" element={<WeeklyOverview weeklyMatchup = {weeklyMatchup} />}/>
+            <Route path="team" element={<Team weeklyMatchup = {weeklyMatchup} />} />
+          </Route>
+          <Route path="/it" element={<LeagueHome weeklyMatchup = {weeklyMatchup} />} >
+            <Route path="matchup" element={<WeeklyOverview weeklyMatchup = {weeklyMatchup} />}/>
+            <Route path="team" element={<Team weeklyMatchup = {weeklyMatchup} />} />
+          </Route>
+          <Route path="/hockey" element={<LeagueHome weeklyMatchup = {weeklyMatchup} />} >
+            <Route path="matchup" element={<WeeklyOverview weeklyMatchup = {weeklyMatchup} />}/>
+            <Route path="team" element={<Team weeklyMatchup = {weeklyMatchup} />} />
+          </Route>
+          
           <Route path="/" element={<Home />} />
         </Routes>
     </Router>
@@ -41,7 +54,7 @@ function LeagueRoutes({ leagueName }) {
     <>
       <Routes>
         {/*Routes for each league */}
-        <Route path="/overview" element={<WeeklyOverview leagueName={leagueName} />} />
+        <Route path="overview" element={<WeeklyOverview leagueName={leagueName}/>}/>
         <Route path="/team" element={<Team />} />
       </Routes>
     </>
