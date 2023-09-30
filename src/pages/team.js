@@ -122,7 +122,7 @@ export default function MyTeam({ weeklyMatchup }) {
   console.log('Team Exit Data', combinedItems)
   return (
     <>
-      <h2 style={{ textAlign: "center", color: "white" }}>Preformance relative to Projected</h2>
+      <p style={{ textAlign: "left", color: "white" }}>Bars indicate the delta between projected scores to actual scores.</p>
       <div>
         <label style={{ textAlign: "center", color: "white" }}>Select Team Manager:</label>
         <select className="weekDropdownBox" onChange={handleDropdownChange} value={selectedManager}>
