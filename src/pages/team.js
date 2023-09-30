@@ -77,10 +77,19 @@ export default function MyTeam({ weeklyMatchup }) {
       if (index == -1) {
         index += 1
       }
-      let highestPoints = -Infinity
-      let lowestPoints = Infinity
+      let highestPoints = 0
+      let lowestPoints = 0
+
+      // const data = {
+      //   deltaValues: combinedItems[index].roster.map((p) => p.delta),
+      //   projectedPoints: combinedItems[index].roster.map((p) => p.player.projectedPoints),
+      //   totalPoints: combinedItems[index].roster.map((p) => p.player.totalPoints)
+      // };
+
       const deltaValues = combinedItems[index].roster.map((p) => p.delta)
       const labels = combinedItems[index].roster.map((p) => p.player.fullName);
+      const projectedPoints = combinedItems[index].roster.map((p) => p.player.projectedPoints);
+      const totalPoints = combinedItems[index].roster.map((p) => p.player.totalPoints);
       const barColor = combinedItems[index].roster.map((p) => p.chartColor);
       combinedItems[index].roster.forEach((p) => {
         if (p.delta > highestPoints) {
@@ -106,13 +115,41 @@ export default function MyTeam({ weeklyMatchup }) {
         ],
       },
       options: {
+        plugins: {
+            legend: {
+              display: false,
+          },
+          // tooltip: {
+          //   // callbacks: {
+          //   //   beforeLabel: function (p) {
+          //   //     const index = p.dataIndex;
+          //   //     console.log('p: ', p)
+          //   //     console.log('projectedPoints', projectedPoints[index])
+
+          //   //        // Customize tool tip titles based on the dataset index
+          //   //     const projectedPoints = projectedPoints[index];
+                
+          //   //     return `Projected: ${projectedPoints}`
+          //     }
+            // }
+          // }
+        },
         indexAxis: 'y',
         scales: {
           x: {
             beginAtZero: true,
-            min: -20,
+            min: lowestPoints,
             max: highestPoints,
+            grid: {
+              color: 'White'
+            }
           },
+          y: {
+            grid: {
+              color: 'Grey',
+              tickLength: 0
+            }
+          }
         },
       },
     });

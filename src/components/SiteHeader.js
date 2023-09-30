@@ -23,7 +23,7 @@ function SiteHeader({ handleLeagueChange }) {
     if (typeof leagueId == 'number') {
       getBoxscoreForWeek(leagueId, selectedWeek).then((matchup) => {
         handleLeagueChange(matchup);
-        console.log('Weekly Matchup (SiteHeader.js)', matchup)
+        // console.log('Weekly Matchup (SiteHeader.js)', matchup)
       })
     }
   }, [leagueId, selectedWeek]);//Request new Data at change of League or week  
@@ -74,26 +74,18 @@ function SiteHeader({ handleLeagueChange }) {
           </div>
         </div>
         <div className="league-bar">
-          <button onClick={() => {
-            setSelectedLeague('gvl');//a.out This text is code internal
-          }}
-            className={selectedLeague === 'gvl' ? 'selected' : ''}>G-Vegas</button>
+          <button onClick={() => {setSelectedLeague('gvl');//a.out This text is code internal
+          }} className={selectedLeague === 'gvl' ? 'selected' : ''}>G-Vegas</button>
 
-          <button onClick={() => {
-            setSelectedLeague('family');
-          }}
-            className={selectedLeague === 'family' ? 'selected' : ''}>League of Family Drama</button>
+          <button onClick={() => {setSelectedLeague('family');
+          }} className={selectedLeague === 'family' ? 'selected' : ''}>League of Family Drama</button>
 
-          <button onClick={() => {
-            setSelectedLeague('work');
-          }}
-            className={selectedLeague === 'work' ? 'selected' : ''}>Logistically, IT&apos;s complicated</button>
-          <button onClick={() => {
-            setSelectedLeague('hockey');
-          }}
-            className={selectedLeague === 'hockey' ? 'selected' : ''}>Turf Hockey</button>
+          <button onClick={() => {setSelectedLeague('work');
+          }} className={selectedLeague === 'work' ? 'selected' : ''}>Logistically, IT&apos;s complicated</button>
+          
+          <button onClick={() => {setSelectedLeague('hockey');
+          }} className={selectedLeague === 'hockey' ? 'selected' : ''}>Turf Hockey</button>
         </div>
-
       </section>
 
     </>

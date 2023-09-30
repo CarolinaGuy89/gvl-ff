@@ -27,7 +27,7 @@ function App() {
         {/*<WeekSelector onWeekChange={handleWeekChange}/>*/}
         <Routes>
           {/* League Routes */}
-          <Route path="/gvl" element={<LeagueHome />}>
+          <Route path="/gvl" element={<LeagueHome weeklyMatchup = {weeklyMatchup} />}>
             <Route path="matchup" element={<WeeklyOverview weeklyMatchup = {weeklyMatchup} />}/>
             <Route path="team" element={<Team weeklyMatchup = {weeklyMatchup} />} />
           </Route>
