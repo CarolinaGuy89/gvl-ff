@@ -8,12 +8,14 @@ import WeeklyOverview from './pages/WeeklyOverview.js';
 import { calculateDefaultWeek } from './components/WeekSelect';
 import LeagueHome from './pages/LeagueHome';
 import Home from './pages/Home';
+import { WeekSelector } from './components/WeekSelect';
 
 function App() {
     const [leagueId, setLeagueId] = useState(1248073066);
     const [weeklyMatchup, setWeeklyMatchup] = useState();
     const [selectedWeek, setSelectedWeek] = useState(calculateDefaultWeek);
     // Define a function to receive the value from the child component
+       
     function handleLeagueChange(newLeagueId) {
       setWeeklyMatchup(newLeagueId);
     }
@@ -45,18 +47,6 @@ function App() {
           <Route path="/" element={<Home />} />
         </Routes>
     </Router>
-    </>
-  );
-}
-
-function LeagueRoutes({ leagueName }) {
-  return (
-    <>
-      <Routes>
-        {/*Routes for each league */}
-        <Route path="overview" element={<WeeklyOverview leagueName={leagueName}/>}/>
-        <Route path="/team" element={<Team />} />
-      </Routes>
     </>
   );
 }

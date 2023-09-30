@@ -14,6 +14,10 @@ function SiteHeader({ handleLeagueChange }) {
   const [selectedWeek, setSelectedWeek] = useState(calculateDefaultWeek);
   const [page, setPage] = useState()
 
+  function handleWeekChange(newWeek) {
+    setSelectedWeek(newWeek);
+  }
+
   useEffect(() => {
     //Don't requst API data unless leagueId is set
     if (typeof leagueId == 'number') {
@@ -61,7 +65,15 @@ function SiteHeader({ handleLeagueChange }) {
   return (
     <>
     <section className='SiteHeader'>
+    <div class="title-week-container">
+    <div className='title-container'>
       <h1 className="pageTitle">{pageTitle}</h1>
+      </div>
+
+      <div className='week-container'>
+      <WeekSelector onWeekChange={handleWeekChange}/>
+      </div>
+      </div>
       <div className="league-bar">
         <button onClick={() => {
           setSelectedLeague('gvl');//a.out This text is code internal
@@ -82,6 +94,7 @@ function SiteHeader({ handleLeagueChange }) {
         }}
           className={selectedLeague === 'hockey' ? 'selected' : ''}>Turf Hockey</button>
       </div>
+
       </section>
 
     </>

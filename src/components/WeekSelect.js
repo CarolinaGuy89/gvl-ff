@@ -35,7 +35,6 @@ export function WeekSelector({ onWeekChange }) {
 return(
 <>
     <div className='selectWeek'>
-    <label className="weekDropdownTitle">Select Week:  </label>
     <select className="weekDropdownBox" onChange={handleWeekChange} value={selectedWeek}>
       {console.log(selectedWeek)}
       {weekNumbers.map((weekNumber) => (

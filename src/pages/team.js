@@ -85,7 +85,7 @@ export default function MyTeam({ weeklyMatchup }) {
           <h1 style={{ textAlign: "center", color: "white" }}>Actual Preformance relative to Projected</h1>
           <h2 style={{ textAlign: "center", color: "white" }}>Test Data for {combinedItems[2].manager}/Week {combinedItems[2].weekId} </h2>
           <div style={{background: "rgba(0, 0, 0, .6)"}}>
-            <canvas id="teamPreformanceChart" width="400" height="300"></canvas>
+            <canvas id="teamPreformanceChart" width="400" height="500"></canvas>
           </div>
     </>
   )
