@@ -1,9 +1,12 @@
 import { Link, Outlet } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function LeagueHome() {
+export default function LeagueHome({weeklyMatchup}) {
   const [selectedPage, setSelectedPage] = useState('matchup')
 
+  useEffect (() => {
+    setSelectedPage('matchup')
+  }, [weeklyMatchup]);
 
   return (
     <>

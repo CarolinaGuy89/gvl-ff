@@ -2,8 +2,10 @@ import React, { useEffect, useState, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
 
+
 export default function MyTeam({ weeklyMatchup }) {
   console.log('Team Entry Data', weeklyMatchup);
+  const [selectedManager, setSelectedManager] = useState('');
 
   var combinedItems = []
   weeklyMatchup.forEach((item) => {
@@ -34,24 +36,60 @@ export default function MyTeam({ weeklyMatchup }) {
     combinedItems.sort((a, b) => b.score - a.score);
   });
 
+    //Extract manager names for selection box
+    const managerNames = combinedItems.map((item) => item.manager);
+    let index = combinedItems.findIndex((item) => item.manager === selectedManager);
+    const handleDropdownChange = (event) => {
+      setSelectedManager(event.target.value);
+    };
+  
+  // Custom sorting of the player rosters
+  const positionOrder = ['QB', 'RB', 'WR', 'TE', 'Flex', 'D/ST', 'K', 'Bench', 'IR'];
+
+  // Get the position index based on positionOrder
+  function getPositionIndex(position) {
+    const index = positionOrder.indexOf(position);
+    return index === -1 ? positionOrder.length : index;
+  }
+  
+
+  // Sort each roster within combinedItems
+  combinedItems.forEach((team) => {
+    team.roster.sort((a, b) => {
+      const indexA = getPositionIndex(a.position);
+      const indexB = getPositionIndex(b.position);
+    // Sort by the custom order index
+      return indexA - indexB;
+    });
+  });
 
   const chartRef = useRef(null);
   const [chartInstance, setChartInstance] = useState(null);
 
   useEffect(() => {
-    console.log('chartRef.current',!chartRef.current)
     if (combinedItems.length === 0) return;
 
     // Destroy the previous chart instance, if it exists
     if (chartRef.current) {
       chartRef.current.destroy();
     }
-    // Create the new chart
 
-    const deltaValues = combinedItems[2].roster.map((p) => p.delta)
-    console.log('deltaValues:' , deltaValues)
-    const labels = combinedItems[2].roster.map((item) => item.player.fullName);
-
+      if (index == -1) {
+        index += 1
+      }
+      let highestPoints = -Infinity
+      let lowestPoints = Infinity
+      const deltaValues = combinedItems[index].roster.map((p) => p.delta)
+      const labels = combinedItems[index].roster.map((p) => p.player.fullName);
+      const barColor = combinedItems[index].roster.map((p) => p.chartColor);
+      combinedItems[index].roster.forEach((p) => {
+        if (p.delta > highestPoints) {
+          highestPoints = p.delta
+        } else if (p.delta < lowestPoints) {
+          lowestPoints = p.delta
+        }
+      })
+      console.log('highestPoints',highestPoints)
     const canvas = document.getElementById('teamPreformanceChart');
     chartRef.current = new Chart(canvas, {
       type: 'bar',
@@ -61,8 +99,8 @@ export default function MyTeam({ weeklyMatchup }) {
           {
             label: 'Delta',
             data: deltaValues,
-            backgroundColor: 'rgba(75, 192, 192, 1)',
-            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: barColor,
+            borderColor: barColor,
             borderWidth: 1,
           },
         ],
@@ -72,21 +110,32 @@ export default function MyTeam({ weeklyMatchup }) {
         scales: {
           x: {
             beginAtZero: true,
+            min: -20,
+            max: highestPoints,
           },
         },
       },
     });
-  }, [weeklyMatchup]);
+  }, [weeklyMatchup, selectedManager]);
 
 
   console.log('Team Exit Data', combinedItems)
   return (
     <>
-          <h1 style={{ textAlign: "center", color: "white" }}>Actual Preformance relative to Projected</h1>
-          <h2 style={{ textAlign: "center", color: "white" }}>Test Data for {combinedItems[2].manager}/Week {combinedItems[2].weekId} </h2>
-          <div style={{background: "rgba(0, 0, 0, .6)"}}>
-            <canvas id="teamPreformanceChart" width="400" height="500"></canvas>
-          </div>
+      <h2 style={{ textAlign: "center", color: "white" }}>Preformance relative to Projected</h2>
+      <div>
+        <label style={{ textAlign: "center", color: "white" }}>Select Team Manager:</label>
+        <select className="weekDropdownBox" onChange={handleDropdownChange} value={selectedManager}>
+          {managerNames.map((name) => (
+            <option key={name} value={name}>
+              {name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div style={{ background: "rgba(0, 0, 0, .6)" }}>
+        <canvas id="teamPreformanceChart" width="400" height="500"></canvas>
+      </div>
     </>
   )
 }

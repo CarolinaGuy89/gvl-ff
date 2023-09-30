@@ -1,6 +1,8 @@
 import { Client } from 'espn-fantasy-football-api/web.js';
 import { determineOwner } from '../components/teamowners';
 
+
+
 export const getBoxscoreForWeek = async (leagueId, selectedWeek) => {
     const myClient = new Client({ leagueId });
     try {
@@ -8,7 +10,7 @@ export const getBoxscoreForWeek = async (leagueId, selectedWeek) => {
             seasonId: 2023,
             matchupPeriodId: selectedWeek,
             scoringPeriodId: selectedWeek,
-        })
+        })       
 
         matchup.weekId = selectedWeek;
         matchup.leagueId = leagueId;
@@ -32,6 +34,7 @@ export const getBoxscoreForWeek = async (leagueId, selectedWeek) => {
                 p.projectedPoints = parseFloat(sumProjectedPoints.toFixed(1))
                 p.delta = parseFloat((p.totalPoints - p.projectedPoints).toFixed(2))
                 p.position = p.position === "RB/WR/TE" ? 'Flex' : p.position
+                p.chartColor = (p.position === 'Bench' ||  p.position === 'IR') ? 'dimgrey' : p.delta < 0 ? 'Brown' : 'LimeGreen';
                 delete p.projectedRawStats
                 delete p.rawStats
             })
@@ -48,6 +51,7 @@ export const getBoxscoreForWeek = async (leagueId, selectedWeek) => {
                 p.projectedPoints = parseFloat(sumProjectedPoints.toFixed(1))
                 p.delta = parseFloat((p.totalPoints - p.projectedPoints).toFixed(2))
                 p.position = p.position === "RB/WR/TE" ? 'Flex' : p.position
+                p.chartColor = (p.position === 'Bench' ||  p.position === 'IR') ? 'dimgrey' : p.delta < 0 ? 'Brown' : 'LimeGreen';
                 delete p.projectedRawStats
                 delete p.rawStats
             })
@@ -58,8 +62,7 @@ export const getBoxscoreForWeek = async (leagueId, selectedWeek) => {
 
             element.homeManager = determineOwner(leagueId, element.homeTeamId)
             element.awayManager = determineOwner(leagueId, element.awayTeamId)
-        }
-        );
+        });
         console.log('-------------API CALL------------');
         console.log(matchup);
         return matchup;

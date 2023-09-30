@@ -1,6 +1,6 @@
 function Home() {
     return (
-        <h1> Hello Home Splash Screen</h1>
+        <h1 style={{ textAlign: "center", color: "white" }}><br/>Choose your League</h1>
     )
 }
 
