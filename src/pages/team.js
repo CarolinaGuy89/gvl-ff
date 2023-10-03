@@ -119,20 +119,26 @@ export default function MyTeam({ weeklyMatchup }) {
             legend: {
               display: false,
           },
-          // tooltip: {
-          //   // callbacks: {
-          //   //   beforeLabel: function (p) {
-          //   //     const index = p.dataIndex;
-          //   //     console.log('p: ', p)
-          //   //     console.log('projectedPoints', projectedPoints[index])
-
-          //   //        // Customize tool tip titles based on the dataset index
-          //   //     const projectedPoints = projectedPoints[index];
-                
-          //   //     return `Projected: ${projectedPoints}`
-          //     }
-            // }
-          // }
+          tooltip: {
+            callbacks: {
+              beforeLabel: function (p) {
+                const dataindex = p.dataIndex;
+                const pPts = combinedItems[index].roster[dataindex].projectedPoints
+                const tPts = combinedItems[index].roster[dataindex].totalPoints
+                return (
+                  `Actual:  ${tPts.toFixed(2)}
+Projected: ${pPts.toFixed(2)}`
+                )
+              },
+              afterLabel: function (p) {
+                const dataindex = p.dataIndex;
+                const pPts = combinedItems[index].roster[dataindex].projectedPoints
+                const tPts = combinedItems[index].roster[dataindex].totalPoints
+                const ePts = (tPts-pPts)/pPts*100
+                return `Error: ${ePts.toFixed(0)}%`
+              }
+            }
+          }
         },
         indexAxis: 'y',
         scales: {
