@@ -110,14 +110,14 @@ const closestMatch = boxscores.reduce((closest, current) => {
             <div className="card-title">
                 <h3>Highest Scoring Loser</h3>
             </div>
-            <p>{highLoserName} scored {highLoserScore} points,<br />would have beat {highLoserSalt} {highLoserSalt === 1 ? "other" : "others"}</p>
+            <p>{highLoserName} lost with {highLoserScore} points,<br />would have beat {(highLoserSalt == combinedItems.length-2) ? "any other team": highLoserSalt+(highLoserSalt === 1 ? (" other") : " others")}</p>
         </div>
 
         <div className="stat-card">
             <div className="card-title">
                 <h3>Lowest Scoring Winner</h3>
             </div>
-            <p>{lowWinName} won with only {lowWinScore} points,<br />would have lost to {lowWinSalt} {lowWinSalt === 1 ? "other" : "others"}</p>
+            <p>{lowWinName} won with {lowWinScore} points,<br />would have lost to {(lowWinSalt == combinedItems.length-2) ? "any other team": lowWinSalt+(lowWinSalt === 1 ? (" other") : " others")}</p>
         </div>
     </section>
 </>
