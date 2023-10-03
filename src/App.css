@@ -10,24 +10,16 @@ p {
 
 /* Set a base font size and font family */
 body {
-  background-image: url('../public/background.jpg');
+  background-image: url('../public/background_mobile2.jpg');
   background-color: var(--bg);
   background-blend-mode: multiply;
   background-size: cover;
-  background-position: center center;
+  background-position: bottom right 25%;
   background-repeat: no-repeat;
   background-attachment: fixed;
-
   font-size: 16px;
   font-family: Arial, sans-serif;
-}
-
-/* Apply styles to a container element */
-.container {
-  width: 100%;
-  max-width: 1200px; /* Adjust the maximum width as needed */
-  margin: 0 auto; /* Center the container horizontally */
-  padding: 20px; /* Add padding to the container */
+  color: whitesmoke;
 }
 
 /* Style headings */
@@ -63,12 +55,15 @@ h3 {
 
 .pageTitle {
   margin-top: 0px;
-  font-size: 8vh;
+  font-size: 6vmin;
   text-align: center;
-  color: white; /* Text color for the title */
+  color: whitesmoke; /* Text color for the title */
   margin-bottom: 0px;
   flex: 1; 
-  background: radial-gradient(closest-side,rgb(13, 32, 13), rgba(255,255,255,0))
+}
+
+.title-week-container {
+  max-width: 50%;
 }
 
 .league-bar {
@@ -85,19 +80,20 @@ h3 {
   transition: all 0.3s ease;
   background-color: rgba(0, 0, 0, 0.582);
   color: whitesmoke;
-  font-size: 3.5vh;
+  font-size: 1.5rem;
   height: 10vh;
   width: 100%; /* Make buttons take the full width of the .league-bar */
   border-radius: 5vw;
 }
 
 .league-bar button:hover {
-  background-color: rgb(4, 170, 109);
+  background-color: rgba(200, 255, 227, 0.719);
+  color: black;
+  font-weight: bold;
 }
 
 .league-bar button.selected {
-  background-color: rgba(20, 255, 32, 1);
-  color: #000000;
+  background-color: rgb(4, 170, 109);
   font-weight: bold;
 }
 
@@ -131,12 +127,18 @@ h3 {
 /* Style the links inside the navigation bar */
 .pageSelectBar a {
   float: left;
-  color: #f2f2f2;
+  color: whitesmoke;
   text-align: center;
   padding: 14px 6px;
   border-radius: 18px;
   text-decoration: none;
   font-size: 14px;
+}
+
+/* Add a color to the active/current link */
+.pageSelectBar a.selected {
+  background-color: #04AA6D;
+  color: white;
 }
 
 /* Change the color of links on hover */
@@ -148,7 +150,7 @@ h3 {
 /* Add a color to the active/current link */
 .topnav a.selected {
   background-color: #04AA6D;
-  color: white;
+  color: whitesmoke;
 }
 
 /**************************************
@@ -159,13 +161,12 @@ h3 {
 
 .selectWeek {
   padding: 10px 0px 10px 10px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
 }
 
-.weekDropdownTitle {
-  font-size: 18px;
-  font-weight: bold;
-  color: rgb(187, 255, 178);
-}
+
 
 .weekDropdownBox {
   font-size: 16px;
@@ -197,9 +198,11 @@ h3 {
 ***************************************/
 
 .stat-card-container {
+  background-color:rgba(0, 0, 0, 0);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-bottom: 1rem;
 }
 
 .stat-card {
@@ -210,10 +213,12 @@ h3 {
   box-shadow: .5rem .5rem .5rem #00000090;
   flex: 1 1 0;
   max-width: 15rem;
-  min-height: 10rem;
+  min-width: 100px;
+  min-height: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  color:black;
 }
 
 .card-title {
@@ -222,40 +227,49 @@ h3 {
   border-radius: 5px 5px 0px 0px;
   min-height: 25%;
   text-align: center;
-
+  color:black;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.card-title h3 {
-  margin: 5px;
-}
 
 .stat-card p {
   margin: 7px 7px 25px 7px;
-}
-
-.matchupChart {
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .5) 40%);
-  color: rgb(187, 255, 178);
-  font-size: 18px;
   text-align: center;
 }
 
+.matchupChart {
+  background: linear-gradient(rgba(0, 0, 0, 0),  rgba(0, 0, 0, .7) 50%,rgba(0, 0, 0, .7) 90%, rgba(0, 0, 0, 0));
+  color: rgb(187, 255, 178);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  max-height: 60vh;
+}
+
+.teamOverviewChart {
+  background: rgba(0, 0, 0, .6);
+}
+
+.teamOverviewHeader {
+  padding-top: 1rem;
+  text-align: center;
+}
 
 /**************************************
 //
 // Mobile Device Styles
 //
 ***************************************/
-@media (max-width: 500px) {
+@media (max-width: 600px) {
 
   body {
-    background-image: url('../public/background_mobile.jpg');
     /*background-color: var(--bg);*/
     /*background-blend-mode: multiply;*/
     background-size: cover;
-    background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
   
@@ -265,10 +279,13 @@ h3 {
   }
 
 .matchupChart {
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .5) 40%);
   color: rgb(187, 255, 178);
   font-size: 18px;
   text-align: center;
+}
+
+.boxscoreChart {
+  max-height: 50vh;
 }
   
 /**************************************
@@ -284,12 +301,6 @@ h3 {
 /**************************************
 //  MOBILE: style for section SiteHeader
 //***************************************/
-.SiteHeader {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
 
 .title-week-container {
   flex-direction: column;
@@ -303,13 +314,7 @@ h3 {
 }
 
 .pageTitle {
-  margin-top: 0px;
   font-size: 8vw;
-  text-align: center;
-  color: white; /* Text color for the title */
-  margin-bottom: 0px;
-
-  background: radial-gradient(closest-side,rgb(13, 32, 13), rgba(255,255,255,0))
 }
 
 .league-bar {
@@ -321,24 +326,8 @@ h3 {
 }
 
 .league-bar button {
-  text-align: center;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-  color: whitesmoke;
   font-size: 3.5vw;
   height: 18vw;
-  width: 100%; /* Make buttons take the full width of the .league-bar */
-  border-radius: 5vw;
-}
-
-.league-bar button:hover {
-  background-color: rgb(4, 170, 109);
-}
-
-.league-bar button.selected {
-  background-color: rgba(20, 255, 32, 1);
-  color: #000000;
-  font-weight: bold;
 }
 
 
@@ -346,91 +335,33 @@ h3 {
 //  MOBILE: Style for the navigation bar
 ***************************************/
 
-/* Add a black background color to the top navigation */
-.pageSelectBar {
-  background-color: #333;
-  overflow: hidden;
-}
-
 /* Style the links inside the navigation bar */
 .pageSelectBar a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
   padding: 6px 12px;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-/* Add a color to the active/current link */
-.pageSelectBar a.selected {
-  background-color: #04AA6D;
-  color: white;
-}
-
-/**************************************
-//  MOBILE: Style for the dropdown box
-***************************************/
-
-.selectWeek {
-  display: flex;
-  justify-content: center;
-  padding-top: 8px;
-}
-
-.weekDropdownTitle {
-  font-size: 18px;
-  font-weight: bold;
-  color: rgb(187, 255, 178);
-  padding: 2.5% 0% 0% 0%;
-}
-
-.weekDropdownBox {
-  font-size: 16px;
 }
 
 /**************************************
 //  MOBILE: Style for stat cards
 ***************************************/
-.stat-card-container {
-  background-color:rgba(0, 0, 0, 0);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.stat-card {
-  background-color: rgba(255, 255, 255, .6);
-  /* padding: .5rem; */
-  border-radius: 5px;
-  margin: 2.5%;
-  box-shadow: .5rem .5rem .5rem #00000090;
-  flex: 1 1 0;
-  max-width: 45%;
-  min-height: 5rem;
 
+.stat-card-container {
+  padding-bottom: .25rem;
+}
+
+.stat-card {
+  padding: 0rem;
+  margin: 2.5%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.card-title {
-  background: var(--bright);
-  width: 100%;
-  border-radius: 5px 5px 0px 0px;
-  min-height: 25%;
-  text-align: center;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .card-title h3 {
-  margin: 5px;
+  margin: 7px;
 }
 
 .stat-card p {
-  margin: 7px 7px 7px 7px;
-  text-align: center;
+  margin: 0px 7px 7px 7px;
 }
 
 /*End Mobile formatting*/

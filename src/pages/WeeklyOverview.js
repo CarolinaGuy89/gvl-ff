@@ -23,13 +23,8 @@ export default function WeeklyOverview({weeklyMatchup}) {
   } else {
     return (
       <>
-        <section>
           <MatchupBoxes boxscores={weeklyMatchup} />
-        </section>
-        <div className='matchupChart'>
           <ChartComponent boxscores={weeklyMatchup} />
-        </div>
-
       </>
     );
   }

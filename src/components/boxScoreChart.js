@@ -89,7 +89,7 @@ export default function ChartComponent({ boxscores }) {
   }, [boxscores]);
 
   return (
-    <div>
+    <div className='matchupChart'>
       <h2>Weekly Matchups</h2>
       <canvas id="boxscoreChart" width="400" height="200"></canvas>
     </div>
