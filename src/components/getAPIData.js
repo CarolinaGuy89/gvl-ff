@@ -1,13 +1,15 @@
-import { Client } from 'espn-fantasy-football-api/web.js';
+import { Client } from 'espn-fantasy-football-api/web-dev'
 import { determineOwner } from '../components/teamowners';
 
-
+var currSeasonID = 2023;
+console.log('File Location', document.currentScript)
 
 export const getBoxscoreForWeek = async (leagueId, selectedWeek) => {
     const myClient = new Client({ leagueId });
     try {
+        console.log('-------------Boxscore API CALL------------');
         var matchup = await myClient.getBoxscoreForWeek({
-            seasonId: 2023,
+            seasonId: currSeasonID,
             matchupPeriodId: selectedWeek,
             scoringPeriodId: selectedWeek,
         })       
@@ -63,9 +65,44 @@ export const getBoxscoreForWeek = async (leagueId, selectedWeek) => {
             element.homeManager = determineOwner(leagueId, element.homeTeamId)
             element.awayManager = determineOwner(leagueId, element.awayTeamId)
         });
-        console.log('-------------API CALL------------');
         console.log(matchup);
         return matchup;
+    } catch (error) {
+        console.error('Error fetching boxscore data:', error);
+        return [];
+    }
+};
+
+export const getTeamsForWeek = async (leagueId, selectedWeek) => {
+    const myClient = new Client({ leagueId });
+    try {
+        console.log('------------Team API CALL------------');
+        var teamData = await myClient.getTeamsAtWeek({
+            seasonId: currSeasonID,
+            scoringPeriodId: selectedWeek,
+        })
+
+        teamData.forEach((t) => {
+            t.weekId = selectedWeek
+            delete t.roster
+            delete t.awayLosses
+            delete t.awayTies
+            delete t.awayWins
+            delete t.divisionLosses
+            delete t.divisionTies
+            delete t.divisionWins
+            delete t.finalStandingsPosition
+            delete t.homeLosses
+            delete t.homeTies
+            delete t.homeWins
+            delete t.season
+            // delete t.regularSeasonPointsAgainst
+            delete t.name
+
+            t.owner = determineOwner(leagueId, t.id)
+        })
+
+        return teamData;
     } catch (error) {
         console.error('Error fetching boxscore data:', error);
         return [];

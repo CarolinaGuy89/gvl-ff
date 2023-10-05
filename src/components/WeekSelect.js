@@ -36,7 +36,6 @@ return(
 <>
     <div className='selectWeek'>
     <select className="weekDropdownBox" onChange={handleWeekChange} value={selectedWeek}>
-      {console.log(selectedWeek)}
       {weekNumbers.map((weekNumber) => (
         <option key={weekNumber} value={weekNumber}>Week #{weekNumber}</option>
       ))}

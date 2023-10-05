@@ -70,7 +70,7 @@ h3 {
   background-color: rgba(0, 0, 0, 0);
   overflow: auto;
   flex: 1; 
-  display: grid;
+  display: flex;
   grid-template-columns: 50% 50%;
 }
 
@@ -201,7 +201,7 @@ h3 {
   background-color:rgba(0, 0, 0, 0);
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding-bottom: 1rem;
 }
 
@@ -209,7 +209,7 @@ h3 {
   background-color: rgba(255, 255, 255, .6);
   border-radius: 5px;
   padding: 10px;
-  margin: 2.5%;
+  margin: 1rem 2rem 1rem 2rem;
   box-shadow: .5rem .5rem .5rem #00000090;
   color:black;
   width: calc(20% - 20px);
@@ -245,12 +245,48 @@ h3 {
 }
 
 .teamOverviewChart {
-  background: rgba(0, 0, 0, .6);
+  background: linear-gradient(rgba(0, 0, 0, 0),  rgba(0, 0, 0, .7) 95%, rgba(0, 0, 0, 0));
+  max-height: 75vh;
 }
 
 .teamOverviewHeader {
   padding-top: 1rem;
   text-align: center;
+}
+
+
+.leagueStandings-container {
+
+  padding: 1px;
+}
+
+.leagueStandings {
+  background-color: rgba(255, 255, 255, .6);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 1rem;
+  box-shadow: .25rem .25rem .5rem .5rem #00000090;
+  color:black;
+  width: calc(20% - 20px);
+
+  
+}
+
+.leagueStandings-container h1 {
+  margin-top: 1rem;
+  margin-left: 2rem;
+}
+
+.leagueStandings td,th {
+  border-bottom: 2px solid black;
+  text-align: center;
+
+}
+
+.leagueStandings tr:nth-child(even) {
+  border-right: 1px solid rgba(255, 255, 255, .5);;
+  background-color: rgba(255, 255, 255, .5);
+    border-collapse: collapse;
 }
 
 /**************************************
@@ -340,6 +376,7 @@ h3 {
 
 .stat-card-container {
   padding-bottom: .25rem;
+  margin: 5px;
 }
 
 .stat-card {
@@ -347,7 +384,8 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: calc(50% - 5vw);
+  width: 45%;
+  margin: 5px;
 }
 
 .card-title h3 {

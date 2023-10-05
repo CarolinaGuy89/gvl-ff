@@ -36,13 +36,13 @@ export default function MyTeam({ weeklyMatchup }) {
     combinedItems.sort((a, b) => b.score - a.score);
   });
 
-    //Extract manager names for selection box
-    const managerNames = combinedItems.map((item) => item.manager);
-    let index = combinedItems.findIndex((item) => item.manager === selectedManager);
-    const handleDropdownChange = (event) => {
-      setSelectedManager(event.target.value);
-    };
-  
+  //Extract manager names for selection box
+  const managerNames = combinedItems.map((item) => item.manager);
+  let index = combinedItems.findIndex((item) => item.manager === selectedManager);
+  const handleDropdownChange = (event) => {
+    setSelectedManager(event.target.value);
+  };
+
   // Custom sorting of the player rosters
   const positionOrder = ['QB', 'RB', 'WR', 'TE', 'Flex', 'D/ST', 'K', 'Bench', 'IR'];
 
@@ -51,14 +51,14 @@ export default function MyTeam({ weeklyMatchup }) {
     const index = positionOrder.indexOf(position);
     return index === -1 ? positionOrder.length : index;
   }
-  
+
 
   // Sort each roster within combinedItems
   combinedItems.forEach((team) => {
     team.roster.sort((a, b) => {
       const indexA = getPositionIndex(a.position);
       const indexB = getPositionIndex(b.position);
-    // Sort by the custom order index
+      // Sort by the custom order index
       return indexA - indexB;
     });
   });
@@ -74,31 +74,31 @@ export default function MyTeam({ weeklyMatchup }) {
       chartRef.current.destroy();
     }
 
-      if (index == -1) {
-        index += 1
+    if (index == -1) {
+      index += 1
+    }
+    let highestPoints = 0
+    let lowestPoints = 0
+
+    // const data = {
+    //   deltaValues: combinedItems[index].roster.map((p) => p.delta),
+    //   projectedPoints: combinedItems[index].roster.map((p) => p.player.projectedPoints),
+    //   totalPoints: combinedItems[index].roster.map((p) => p.player.totalPoints)
+    // };
+
+    const deltaValues = combinedItems[index].roster.map((p) => p.delta)
+    const labels = combinedItems[index].roster.map((p) => p.player.fullName);
+    const projectedPoints = combinedItems[index].roster.map((p) => p.player.projectedPoints);
+    const totalPoints = combinedItems[index].roster.map((p) => p.player.totalPoints);
+    const barColor = combinedItems[index].roster.map((p) => p.chartColor);
+    combinedItems[index].roster.forEach((p) => {
+      if (p.delta > highestPoints) {
+        highestPoints = p.delta
+      } else if (p.delta < lowestPoints) {
+        lowestPoints = p.delta
       }
-      let highestPoints = 0
-      let lowestPoints = 0
-
-      // const data = {
-      //   deltaValues: combinedItems[index].roster.map((p) => p.delta),
-      //   projectedPoints: combinedItems[index].roster.map((p) => p.player.projectedPoints),
-      //   totalPoints: combinedItems[index].roster.map((p) => p.player.totalPoints)
-      // };
-
-      const deltaValues = combinedItems[index].roster.map((p) => p.delta)
-      const labels = combinedItems[index].roster.map((p) => p.player.fullName);
-      const projectedPoints = combinedItems[index].roster.map((p) => p.player.projectedPoints);
-      const totalPoints = combinedItems[index].roster.map((p) => p.player.totalPoints);
-      const barColor = combinedItems[index].roster.map((p) => p.chartColor);
-      combinedItems[index].roster.forEach((p) => {
-        if (p.delta > highestPoints) {
-          highestPoints = p.delta
-        } else if (p.delta < lowestPoints) {
-          lowestPoints = p.delta
-        }
-      })
-      console.log('highestPoints',highestPoints)
+    })
+    console.log('highestPoints', highestPoints)
     const canvas = document.getElementById('teamPreformanceChart');
     chartRef.current = new Chart(canvas, {
       type: 'bar',
@@ -116,8 +116,8 @@ export default function MyTeam({ weeklyMatchup }) {
       },
       options: {
         plugins: {
-            legend: {
-              display: false,
+          legend: {
+            display: false,
           },
           tooltip: {
             callbacks: {
@@ -134,7 +134,7 @@ Projected: ${pPts.toFixed(2)}`
                 const dataindex = p.dataIndex;
                 const pPts = combinedItems[index].roster[dataindex].projectedPoints
                 const tPts = combinedItems[index].roster[dataindex].totalPoints
-                const ePts = (tPts-pPts)/pPts*100
+                const ePts = (tPts - pPts) / pPts * 100
                 return `Error: ${ePts.toFixed(0)}%`
               }
             }
@@ -163,22 +163,27 @@ Projected: ${pPts.toFixed(2)}`
 
 
   console.log('Team Exit Data', combinedItems)
-  return (
-    <>
-      <h2 className="teamOverviewHeader">Players preformance compared to their projections.</h2>
-      <div>
-        <label style={{ textAlign: "center", color: "white" }}>Select Team Manager:</label>
-        <select className="weekDropdownBox" onChange={handleDropdownChange} value={selectedManager}>
-          {managerNames.map((name) => (
-            <option key={name} value={name}>
-              {name}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="teamOverviewChart">
-        <canvas id="teamPreformanceChart" width="400" height="500"></canvas>
-      </div>
-    </>
-  )
+
+  if (weeklyMatchup === undefined) {
+    return 'If you are reading this you might need to select a league.';
+  } else {
+    return (
+      <>
+        <h2 className="teamOverviewHeader">Players preformance compared to their projections.</h2>
+        <div>
+          <label style={{ textAlign: "center", color: "white" }}>Select Team Manager:</label>
+          <select className="weekDropdownBox" onChange={handleDropdownChange} value={selectedManager}>
+            {managerNames.map((name) => (
+              <option key={name} value={name}>
+                {name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="teamOverviewChart">
+          <canvas id="teamPreformanceChart" width="400" height="500"></canvas>
+        </div>
+      </>
+    )
+  }
 }

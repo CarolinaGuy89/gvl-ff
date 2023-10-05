@@ -2,11 +2,12 @@ import '../App.css'
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getBoxscoreForWeek } from './getAPIData';
+import { getTeamsForWeek } from './getAPIData'
 import { calculateDefaultWeek } from './WeekSelect';
 import { Outlet } from 'react-router-dom';
 import { WeekSelector } from './WeekSelect';
 
-function SiteHeader({ handleLeagueChange }) {
+function SiteHeader({ handleLeagueChange, leagueData }) {
   const navigate = useNavigate();
   const [pageTitle, setPageTitle] = useState();
   const [selectedLeague, setSelectedLeague] = useState();
@@ -23,31 +24,40 @@ function SiteHeader({ handleLeagueChange }) {
     if (typeof leagueId == 'number') {
       getBoxscoreForWeek(leagueId, selectedWeek).then((matchup) => {
         handleLeagueChange(matchup);
-        // console.log('Weekly Matchup (SiteHeader.js)', matchup)
       })
     }
   }, [leagueId, selectedWeek]);//Request new Data at change of League or week  
+
+  useEffect(() => {
+    //Don't requst API data unless leagueId is set
+    if (typeof leagueId == 'number') {
+      getTeamsForWeek(leagueId, selectedWeek).then((teamData) => {
+        leagueData(teamData);
+      })
+    }
+  }, [leagueId, selectedWeek]);//Request new Data at change of League or week  
+
 
   function changeLeague(selectedLeague) {
     switch (selectedLeague) {
       case "gvl"://a.in This text is code internal
         setPageTitle("G-Vegas Fantasy Football");
-        navigate('/gvl/matchup'); // This text display in URL Bar
+        navigate('/gvl'); // This text display in URL Bar
         setLeagueId(1248073066);
         break
       case "family":
         setPageTitle("The League of Family Drama");
-        navigate('/family/matchup');
+        navigate('/family');
         setLeagueId(283159008);
         break
       case "work":
         setPageTitle("Logistically, IT's Complicated");
-        navigate('/it/matchup');
+        navigate('/it');
         setLeagueId(601844230);
         break
       case "hockey":
         setPageTitle("Full Contact Turf Hockey");
-        navigate('/hockey/matchup');
+        navigate('/hockey');
         setLeagueId(1335739020);
         break
       default:

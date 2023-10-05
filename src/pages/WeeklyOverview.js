@@ -19,7 +19,14 @@ export default function WeeklyOverview({weeklyMatchup}) {
  
 
   if (weeklyMatchup === undefined) {
-    return 'Loading...';
+    return (
+      <>
+      <h1>Welp, this is awkward...</h1>
+      <p>I have not figured out how to handle refreshes.</p>
+      <br/>
+      <p>Re-select your league to resolve this.</p>
+      </>
+    )
   } else {
     return (
       <>
