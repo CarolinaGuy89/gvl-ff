@@ -1,8 +1,7 @@
 import '../App.css'
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getBoxscoreForWeek } from './getAPIData';
-import { getTeamsForWeek } from './getAPIData'
+import { getBoxscoreForWeek, getDraftData, getTeamsForWeek } from './getAPIData';
 import { calculateDefaultWeek } from './WeekSelect';
 import { Outlet } from 'react-router-dom';
 import { WeekSelector } from './WeekSelect';
@@ -37,6 +36,14 @@ function SiteHeader({ handleLeagueChange, leagueData }) {
     }
   }, [leagueId, selectedWeek]);//Request new Data at change of League or week  
 
+  useEffect(() => {
+    //Don't requst API data unless leagueId is set
+    if (typeof leagueId == 'number') {
+      getDraftData(leagueId).then((draftData) => {
+        console.log('draftData, ', draftData)
+      })
+    }
+  }, [leagueId]);//Request new Data at change of League or week  
 
   function changeLeague(selectedLeague) {
     switch (selectedLeague) {

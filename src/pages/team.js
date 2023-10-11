@@ -4,7 +4,7 @@ import Chart from 'chart.js/auto';
 
 
 export default function MyTeam({ weeklyMatchup }) {
-  console.log('Team Entry Data', weeklyMatchup);
+  //console.log('Team Entry Data', weeklyMatchup);
   const [selectedManager, setSelectedManager] = useState('');
 
   var combinedItems = []
@@ -98,7 +98,7 @@ export default function MyTeam({ weeklyMatchup }) {
         lowestPoints = p.delta
       }
     })
-    console.log('highestPoints', highestPoints)
+    //console.log('highestPoints', highestPoints)
     const canvas = document.getElementById('teamPreformanceChart');
     chartRef.current = new Chart(canvas, {
       type: 'bar',
@@ -162,7 +162,7 @@ Projected: ${pPts.toFixed(2)}`
   }, [weeklyMatchup, selectedManager]);
 
 
-  console.log('Team Exit Data', combinedItems)
+ //console.log('Team Exit Data', combinedItems)
 
   if (weeklyMatchup === undefined) {
     return 'If you are reading this you might need to select a league.';

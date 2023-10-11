@@ -90,6 +90,7 @@ const closestMatch = boxscores.reduce((closest, current) => {
 
     });
     //console.log('combinedItems', combinedItems)
+    //console.log('boxscores: ', boxscores)
     return (
 <>
     <section className="stat-card-container">
@@ -123,6 +124,3 @@ const closestMatch = boxscores.reduce((closest, current) => {
 </>
     )
 }
-/*
-
-          */

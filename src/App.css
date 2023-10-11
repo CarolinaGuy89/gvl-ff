@@ -365,6 +365,12 @@ h3 {
 //  MOBILE: Style for the navigation bar
 ***************************************/
 
+/* Change the color of links on hover */
+.pageSelectBar a:hover {
+  background-color: #04AA6D;
+  color: white;
+}
+
 /* Style the links inside the navigation bar */
 .pageSelectBar a {
   padding: 6px 12px;
