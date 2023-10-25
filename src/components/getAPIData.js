@@ -113,7 +113,6 @@ export const getTeamsForWeek = async (leagueId, selectedWeek) => {
             delete t.homeWins
             delete t.season
             // delete t.regularSeasonPointsAgainst
-            delete t.name
 
             t.owner = determineOwner(leagueId, t.id)
         })

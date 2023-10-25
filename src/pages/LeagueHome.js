@@ -19,7 +19,7 @@ function LeagueHome ({ leagueStandings }) {
       return 
     }
     leagueStandings.sort((a, b) => a.playoffSeed - b.playoffSeed);
-
+    console.log(leagueStandings)
     // Create an HTML table
     const table = document.createElement('table');
     
@@ -42,9 +42,10 @@ function LeagueHome ({ leagueStandings }) {
       const cell1 = row.insertCell(0);
       const cell2 = row.insertCell(1);
       const cell3 = row.insertCell(2);
+      const cell4 = row.insertCell(3);
     
       cell1.textContent = item.playoffSeed;
-      cell2.textContent = item.abbreviation;
+      cell2.textContent = item.name;
       cell3.textContent = item.totalPointsScored.toFixed(2);
     });
 
@@ -66,13 +67,14 @@ function LeagueHome ({ leagueStandings }) {
 
 
         <div className='leagueStandings-container'>
-        <h1>League Standings</h1>
+        <h1>Current League Standings</h1>
         <table className='leagueStandings'>
           <thead>
             <tr>
               <th>Rank</th>
               <th></th>
               <th>GM</th>
+              <th>Team Name</th>
               <th>Record</th>
               <th>PF</th>
               {/* <th>PA</th>
@@ -82,10 +84,11 @@ function LeagueHome ({ leagueStandings }) {
           <tbody>
             {leagueStandings.map((t,i) => (
               <tr key={t.id}>
-                <td style={{ fontSize: 24-(i*1.5) }}>{t.playoffSeed}</td>
+                <td>{t.playoffSeed}</td>
                 <td><img src={t.logoURL} width="25px"/></td>
-                <td style={{ fontSize: 24-(i*1.5) }}>{t.owner}</td>
-                <td style={{ fontSize: 24-(i*1.5) }}>{t.wins} - {t.losses}</td>
+                <td>{t.owner}</td>
+                <td>{t.name}</td>
+                <td>{t.wins} - {t.losses}</td>
                 <td>{t.regularSeasonPointsFor.toFixed(0)}</td>
                 {/*  <td>{t.regularSeasonPointsAgainst.toFixed(0)}</td>
                 <td>{(t.regularSeasonPointsFor-t.regularSeasonPointsAgainst).toFixed(0)}</td> */}

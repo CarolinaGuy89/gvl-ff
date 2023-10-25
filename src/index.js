@@ -4,11 +4,17 @@ import './index.css';
 import App from './App';
 //import reportWebVitals from './reportWebVitals';
 import { Analytics } from '@vercel/analytics/react'
+import SSRProvider from 'react-bootstrap/SSRProvider';
+import "./styles.scss";
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <SSRProvider>
+      <App />
+    </SSRProvider>
     <Analytics />
   </React.StrictMode>
 );

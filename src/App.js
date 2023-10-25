@@ -27,8 +27,8 @@ function App() {
       setleagueStandings(newLeaugeOverview)
     }
 
-    // console.log('Weekly Matchup (App.js)',weeklyMatchup)
-    // console.log('leagueStandings (App.js)',leagueStandings)
+    console.log('Weekly Matchup (App.js)',weeklyMatchup)
+    console.log('leagueStandings (App.js)',leagueStandings)
   return (
     <>
     <Router>
