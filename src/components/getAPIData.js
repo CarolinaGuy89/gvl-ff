@@ -1,4 +1,5 @@
 import { Client } from 'espn-fantasy-football-api/web-dev'
+import { Client } from ''
 import { determineOwner } from '../components/teamowners';
 
 var currSeasonID = 2024;
@@ -93,6 +94,7 @@ export const getTeamsForWeek = async (leagueId, selectedWeek) => {
     const myClient = new Client({ leagueId });
     try {
         console.log('------------Team API CALL------------');
+        console.log(myClient);
         var teamData = await myClient.getTeamsAtWeek({
             seasonId: currSeasonID,
             scoringPeriodId: selectedWeek,
@@ -125,7 +127,7 @@ export const getTeamsForWeek = async (leagueId, selectedWeek) => {
 };
 
 export const getDraftData = async (leagueId) => {
-    const api_url = "https://fantasy.espn.com/apis/v3/games/ffl/seasons/2023/segments/0/leagues/" + leagueId + "?view=mDraftDetail";
+    const api_url = "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2023/segments/0/leagues/" + leagueId + "?view=mDraftDetail";
     //Draft data via direct from source
     async function getapi(url) {
         const response = await fetch(url);
