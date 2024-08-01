@@ -6,10 +6,16 @@ export function calculateDefaultWeek() {
     const currentDate = new Date();
     const startOfWeek1 = new Date('2024-09-05'); // Thursday of NFL Week one
     const millisecondsInAWeek = 604800000;
-    const weeksSinceStart = Math.floor((currentDate - startOfWeek1) / millisecondsInAWeek);
+    var weeksSinceStart = Math.floor((currentDate - startOfWeek1) / millisecondsInAWeek);
+
+    if (weeksSinceStart < 0) {
+      weeksSinceStart = 0;
+    }
     
-    // Ensure the week number is between 1 and 17 (or your season's max week)
-    return Math.min(Math.max(weeksSinceStart + 1, 1), 17);
+    // Ensure the week number is between 0 and 17 (or your season's max week)
+    // 0 = Preseason
+    //return Math.min(Math.max(weeksSinceStart + 1, 1), 17);
+    return Math.min(Math.max(weeksSinceStart, 0), 18);
 }
 
 
@@ -23,7 +29,7 @@ export function WeekSelector({ onWeekChange }) {
     const [selectedWeek, setSelectedWeek] = useState(calculateDefaultWeek());
 
     // Define the length of the season, from week 1 to 17. Single week playoffs
-    const weekNumbers = Array.from({ length: 17 }, (_, index) => index + 1);
+    const weekNumbers = Array.from({ length: 18 }, (_, index) => index);
 
     // Function to handle dropdown selection change
     const handleWeekChange = (event) => {
