@@ -1,5 +1,4 @@
 import { Client } from 'espn-fantasy-football-api/web-dev'
-import { Client } from ''
 import { determineOwner } from '../components/teamowners';
 
 var currSeasonID = 2024;
