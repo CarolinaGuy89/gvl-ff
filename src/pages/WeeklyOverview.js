@@ -10,7 +10,7 @@ export default function WeeklyOverview({weeklyMatchup}) {
   const [selectedWeek, setSelectedWeek] = useState(calculateDefaultWeek);
 
   // Define the length of the season, from week 1 to 17. Single week playoffs
-  const weekNumbers = Array.from({ length: 17 }, (_, index) => index + 1);
+  //const weekNumbers = Array.from({ length: 17 }, (_, index) => index + 1);
 
   // Function to handle dropdown selection change
   // const handleWeekChange = (event) => {
