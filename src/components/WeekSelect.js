@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 export function calculateDefaultWeek() {
 
     const currentDate = new Date();
-    const startOfWeek1 = new Date('2023-09-07'); // Thursday of NFL Week one
+    const startOfWeek1 = new Date('2024-09-05'); // Thursday of NFL Week one
     const millisecondsInAWeek = 604800000;
     const weeksSinceStart = Math.floor((currentDate - startOfWeek1) / millisecondsInAWeek);
     

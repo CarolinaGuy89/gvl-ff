@@ -51,7 +51,7 @@ function LeagueHome ({ leagueStandings }) {
 
 
 
-      // console.log('LeagueHome: ', leagueStandings);
+      console.log('LeagueHome: ', leagueStandings);
       if (leagueStandings === undefined) {
         return (
           <>

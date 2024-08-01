@@ -143,8 +143,7 @@ function Example() {
           <Offcanvas.Title>Change Leauge</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
+          Some text as placeholder.
         </Offcanvas.Body>
       </Offcanvas>
     </>

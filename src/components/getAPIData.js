@@ -1,7 +1,7 @@
 import { Client } from 'espn-fantasy-football-api/web-dev'
 import { determineOwner } from '../components/teamowners';
 
-var currSeasonID = 2023;
+var currSeasonID = 2024;
 
 
 export const getBoxscoreForWeek = async (leagueId, selectedWeek) => {
@@ -81,7 +81,7 @@ export const getBoxscoreForWeek = async (leagueId, selectedWeek) => {
             element.homeManager = determineOwner(leagueId, element.homeTeamId)
             element.awayManager = determineOwner(leagueId, element.awayTeamId)
         });
-        // console.log(matchup);
+        console.log(matchup);
         return matchup;
     } catch (error) {
         console.error('Error fetching boxscore data:', error);
