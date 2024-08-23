@@ -1,7 +1,7 @@
 import { Client } from 'espn-fantasy-football-api/web-dev'
 import { determineOwner } from '../components/teamowners';
 
-var currSeasonID = 2024;
+var currSeasonID = 2023;
 
 
 export const getBoxscoreForWeek = async (leagueId, selectedWeek) => {
